@@ -402,7 +402,7 @@ module.exports = function (config) {
                 ApioSerialRefresh = true;
                 if (Apio.Configuration.serial.enabled) {
                     Apio.io.emit('apio_serial_refresh', {
-                        refresh: false
+                        refresh: true
                     });
                 }
                 setTimeout(checkGenericDongle, 15000);
