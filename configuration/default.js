@@ -12,8 +12,8 @@ module.exports = {
 	},
 
 	remote : {
-		enabled : false,
-		uri : 'http://comfortbox.cloudapp.net'
+		enabled : true,
+		uri : 'http://apio.cloudapp.net'
 	},
 	logging : {
 		enabled:true,

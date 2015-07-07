@@ -964,7 +964,7 @@ app.get("/app",
                    if (err) {
                      var sys = require('sys');
                      var exec = require('child_process').exec;
-                     var child = exec("mongorestore ./data/apio -d apio");
+                     var child = exec("mongorestore ./backup/apio -d apio");
 
 
                     } else {

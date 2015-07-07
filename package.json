@@ -30,7 +30,8 @@
     "express-session-mongo": "^0.1.0",
     "express-session": "^1.11.3",
     "util": "^0.10.3",
-    "forever": "^0.14.2"
+    "forever": "^0.14.2",
+    "socket.io-client": "^1.3.5"
   },
   "devDependencies": {
     "frisby": "^0.8.3"
