@@ -1337,7 +1337,7 @@ Apio.io.on("connection", function(socket){
 
         socket.on("apio_client_update", function(data){
             Apio.Object.update(data,function(){
-                //Apio.Remote.socket.emit('apio.server.object.update',data)
+                Apio.Remote.socket.emit('apio.server.object.update',data)
             })
         });
 
