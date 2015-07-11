@@ -20,7 +20,7 @@
 
 
 "use strict";
-var com = require("serialport")
+var com = require("serialport");
 var express = require("express");
 var path = require("path");
 var logger = require("morgan");
@@ -185,7 +185,7 @@ var setupRemoteConnection = function() {
                                     console.log(err);
                                 }
                                 //else if(parseInt(stats.storageSize)/1024/1024 >= 100){
-                                else if(stats.storageSize){
+                                /*else if(stats.storageSize){
                                     console.log("DB reached to maximum size, sending logs to cloud");
                                     Apio.Database.db.collection("Objects").find().toArray(function(error, objs) {
                                         if(error){
@@ -201,7 +201,7 @@ var setupRemoteConnection = function() {
                                                     /*for(var j in objs[i].log){
                                                         send[j] = objs[i].log[j];
                                                     }*/
-                                                    Apio.Remote.socket.emit('apio.server.object.log.update', send);
+                                                    /*Apio.Remote.socket.emit('apio.server.object.log.update', send);
                                                     Apio.Database.db.collection("Objects").update({ objectId : objs[i].objectId }, { $set : { log : {} } }, function(error_, result){
                                                         if(error_){
                                                             console.log("Unable to update object with objectId "+objs[i].objectId);
@@ -222,7 +222,7 @@ var setupRemoteConnection = function() {
                                             }
                                         }
                                     });
-                                }
+                                }*/
                             });
 
                         });
@@ -593,6 +593,25 @@ app.get("/dashboard",routes.dashboard.index);
     });
 
 
+    app.post("/apio/object/updateLog", function(req, res){
+        var object = typeof req.body.object === "string"  ? JSON.parse(req.body.object) : req.body.object;
+
+        var updt = {}, d = new Date().getTime();
+        for(var i in object.data){
+            updt["log."+i+"."+d] = object.data[i];
+        }
+
+        Apio.Database.db.collection('Objects').update({ objectId : object.objectId }, { $set : updt }, function(err, data){
+            if(err) {
+                console.log("ERRORE");
+                res.status(500).send({});
+            } else if(data) {
+                console.log("SUCCESSO");
+                Apio.io.emit('apio_log_update', { logs : updt, objectId : object.objectId });
+                res.status(200).send({});
+            }
+        });
+    });
 
 /*
 *   Crea un nuovo evento
