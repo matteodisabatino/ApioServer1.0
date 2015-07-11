@@ -48,7 +48,7 @@ apioProperty.directive("dynamicview", ["currentObject", "socket", "$timeout", fu
 				if(!currentObject.isRecording()){
 					//Carimento della subapp
 					var uri = attrs["load"] ? attrs["load"] : "applications/"+scope.object.objectId+"/subapps/"+attrs["propertyname"]+".html";
-					$.get(uri, function(data){
+                    $.get(uri, function(data){
                         if(attrs["load"]){
                             var loadComponents = attrs["load"].split("/");
                             var app = loadComponents[loadComponents.length - 1];
@@ -60,12 +60,39 @@ apioProperty.directive("dynamicview", ["currentObject", "socket", "$timeout", fu
                             var subapp = attrs["propertyname"].charAt(0).toUpperCase() + attrs["propertyname"].slice(1);
                         }
 
-                        $("#ApioApplicationContainer").append($(data));
-                        $("#ApioApplication"+subapp).css("height", ""+$("#ApioApplicationContainer").children().eq(1).css("height"));
-                        $("#ApioApplication"+subapp).css("margin-top", "-"+$("#ApioApplicationContainer").children().eq(1).css("height"));
-                        $("#ApioApplication"+subapp).show("slide", {
-                            direction: 'right'
-                        }, 500);
+                        if(scope.anchor === "<"){
+                            Apio.newWidth -= Apio.appWidth;
+                            $("#ApioApplicationContainer").css("width", Apio.appWidth+"px");
+                            $("#ApioApplication"+subapp).remove();
+
+                            scope.anchor = ">";
+                            scope.$apply();
+                        }
+                        else{
+                            if(window.innerWidth >= 992 && scope.anchor === ">"){
+                                scope.anchor = "<";
+                                scope.$apply();
+                            }
+
+                            /*$("#ApioApplicationContainer").append($(data));
+                             $("#ApioApplication"+subapp).css("height", ""+$("#ApioApplicationContainer").children().eq(1).css("height"));
+                             $("#ApioApplication"+subapp).css("margin-top", "-"+$("#ApioApplicationContainer").children().eq(1).css("height"));
+                             $("#ApioApplication"+subapp).show("slide", {
+                             direction: 'right'
+                             }, 500);*/
+                            Apio.newWidth += Apio.appWidth;
+                            $("#ApioApplicationContainer").css("width", Apio.newWidth+"px");
+                            $("#ApioApplication"+scope.object.objectId).css("width", Apio.appWidth+"px");
+                            $("#ApioApplication"+scope.object.objectId).css("float", "left");
+                            var app_ = $(elem).parent().parent().parent();
+                            //app_.css("overflowX", "auto");
+                            subapp = attrs["propertyname"].charAt(0).toUpperCase() + attrs["propertyname"].slice(1);
+                            $("#ApioApplicationContainer").append($(data));
+                            $("#ApioApplicationContainer").css("overflowX", "scroll");
+                            $("#ApioApplicationContainer").css("webkitOverflowScrolling", "touch");
+                            $("#ApioApplication"+subapp).css("width", Apio.appWidth+"px");
+                            $("#ApioApplication"+subapp).css("float", "left");
+                        }
                     });
 					//
 					
