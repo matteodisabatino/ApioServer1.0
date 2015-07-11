@@ -1376,6 +1376,44 @@ Apio.io.on("disconnect",function(){
     server.listen(configuration.http.port, function() {
         Apio.Util.log("APIO server started on port " + configuration.http.port + " using the configuration:");
         console.log(util.inspect(configuration,{colors:true}));
+
+        setInterval(function(){
+            Apio.Database.db.stats(function(err, stats){
+                if(err){
+                    console.log("Error while getting stats: ", err);
+                } else if(Number(stats.storageSize)/1024/1024 >= 100){
+                    console.log("DB reached to maximum size, sending logs to cloud");
+                    Apio.Database.db.collection("Objects").find().toArray(function(error, objs){
+                        if(error){
+                            console.log("Error while getting objects");
+                        } else if(objs){
+                            var send = [];
+                            for(var i in objs){
+                                send.push({
+                                    apioId : Apio.System.getApioIdentifier(),
+                                    log : objs[i].log,
+                                    objectId : objs[i].objectId
+                                });
+                            }
+                            Apio.Remote.socket.emit('apio.server.object.log.update', send);
+                            Apio.Database.db.collection("Objects").update({}, {$set : {log : {}}}, function(e, r){
+                                if(e){
+                                    console.log("Error while updating logs", e);
+                                } else if(r){
+                                    Apio.Database.db.command({ compact: 'Objects', paddingFactor: 1 }, function(er, re){
+                                        if(er){
+                                            console.log("Unable to compact collection Objects");
+                                        } else if(re){
+                                            console.log("Return of compact is: ", re);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }, 60000);
     });
 
 
