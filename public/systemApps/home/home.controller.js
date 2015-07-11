@@ -30,7 +30,41 @@ angular.module('ApioApplication').controller('ApioHomeController',
     "$rootScope",
     "$routeParams",
     "$location",
-    function($scope, $http, socket, objectService, DataSource, $modal, currentObjectService, $rootScope,$routeParams,$location) {
+    "sweet",
+    function($scope, $http, socket, objectService, DataSource, $modal, currentObjectService, $rootScope,$routeParams,$location,sweet) {
+        socket.on("apio_shutdown", function(){
+            var time = 30;
+            sweet.show({
+                title : "Il sistema si spegnerà tra 30 secondi",
+                text : "Questo messaggio si chiuderà automaticamente",
+                type : "warning",
+                timer : 30000,
+                showCancelButton : false,
+                confirmButtonClass : "btn-success",
+                closeOnConfirm : false
+            });
+            var nodes = document.getElementsByClassName("sweet-alert").item(0).childNodes;
+            for(var i in nodes){
+                if(nodes[i].nodeName === "H2"){
+                    var titleNode = nodes[i];
+                    titleNode.parentNode.removeChild(titleNode.nextSibling.nextSibling);
+                    break;
+                }
+            }
+            var countdown = setInterval(function(){
+                time--;
+                if(time === 0){
+                    clearInterval(countdown);
+                    document.body.innerHTML = "";
+                }
+                else if(time === 1){
+                    titleNode.innerHTML = "Il sistema si spegnerà tra "+time+" secondo";
+                }
+                else{
+                    titleNode.innerHTML = "Il sistema si spegnerà tra "+time+" secondi";
+                }
+            }, 1000);
+        });
         
 
         document.getElementById("targetBody").style.position = "";
@@ -76,13 +110,7 @@ angular.module('ApioApplication').controller('ApioHomeController',
 
         });*/
 
-        $scope.launchDashboard = function() {
-            window.location = 'dashboard#/home'
-        }
-
-        $scope.shutdown = function(){
-            $http.get('/apio/shutdown').success(function(){}).error(function(){});
-        };
+       
         
 
         //Riferimento a tutti gli oggetti scaricati dal db
@@ -183,7 +211,7 @@ angular.module('ApioApplication').controller('ApioHomeController',
 
             $.get("applications/" + id + "/" + id + ".html", function(data) {
                 if (window.innerWidth > 769)
-                    $("#ApioIconsContainer").css("width", "77%");
+                    $("#ApioIconsContainer").css("width", "65%");
 
                 $("#ApioApplicationContainer").html($(data));
                 $("#ApioApplicationContainer").find("h2").text($scope.currentObject.name);
@@ -220,7 +248,7 @@ angular.module('ApioApplication').controller('ApioHomeController',
 
             $.get("applications/" + id + "/" + id + ".html", function(data) {
                 if (window.innerWidth > 769)
-                    $("#ApioIconsContainer").css("width", "77%");
+                    $("#ApioIconsContainer").css("width", "65%");
 
                 $("#ApioApplicationContainer").html($(data));
                 $("#ApioApplicationContainer").find("h2").text($scope.currentObject.name);

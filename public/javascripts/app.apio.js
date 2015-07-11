@@ -420,7 +420,7 @@ var apioProperty = angular.module('apioProperty', ['ApioApplication']);
     return $window.sharedService;
   }]);
 
-ApioApplication.controller("ApioMainController", ["socket", "sweet", function (socket, sweet) {
+ApioApplication.controller("ApioMainController", ["$scope", "$http", "socket", "sweet", function ($scope, $http,socket, sweet) {
     socket.on("apio_serial_refresh", function (data) {
         if(data.refresh === true){
             var time = 25;
@@ -458,4 +458,11 @@ ApioApplication.controller("ApioMainController", ["socket", "sweet", function (s
             sweet.close();
         }
     });
+     $scope.launchDashboard = function() {
+            window.location = 'dashboard#/home'
+        }
+
+        $scope.shutdown = function(){
+            $http.get('/apio/shutdown').success(function(){}).error(function(){});
+        };
 }]);

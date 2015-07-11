@@ -1115,7 +1115,11 @@ margin-top: 5%;
     .apioApplicationNavbar a {
         font-size: 40px !important;
     }
+    .apioApplicationNavbar {
+    width: 100%;
 }
+}
+
 /*Top app oggetto inizio*/
 @media (min-width: 481px) and (max-width: 600px) {
     #intro_rec {
@@ -1280,6 +1284,9 @@ margin-top: 5%;
 }
 
 @media (min-width: 1001px) {
+	.apioApplicationNavbar {
+    width: 100%;
+}
     #content_menu {
         width: 100%;
         display: table;
@@ -2466,7 +2473,7 @@ margin-top: 5%;
 /*==========  Mobile First Method  ==========*/
 
     /* Custom, iPhone Retina */ 
-    @media only screen and (min-width : 320px) {
+    @media only screen (min-width : 320px) {
         .nav>li {
             display:inline;
             float:left;

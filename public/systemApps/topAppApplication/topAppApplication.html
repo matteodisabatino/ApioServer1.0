@@ -145,11 +145,11 @@
 		}
 	</style>
 	<div class="topAppApplication">
-<div class="col-xs-3">
+        <div class="col-xs-3">
             <div class="btn btn-default btn-lg button-back">
-<span class="glyphicon glyphicon-circle-arrow-left" ng-show="!currentObject.isRecording() &amp;&amp; !currentObject.isModifying() &amp;&amp; !showPublishButton" ng-click="goBackToHome()"></span>
-</div>
-			<div id="menu_object_networkinput" class="systembutton pubblica ng-hide" ng-class="{'pubblica_on': currentObject.recordLength() != '0'}" ng-show="currentObject.isRecording() &amp;&amp; !currentObject.isModifying() &amp;&amp; !showPublishButton" ng-click="useRecording()">Usa</div>
+                <span class="glyphicon glyphicon-circle-arrow-left" ng-show="!currentObject.isRecording() && !currentObject.isModifying() && !showPublishButton" ng-click="goBackToHome()"></span>
+            </div>
+			<div id="menu_object_networkinput" class="systembutton pubblica ng-hide" ng-class="{'pubblica_on': currentObject.recordLength() != '0'}" ng-show="currentObject.isRecording() && !currentObject.isModifying() && !showPublishButton" ng-click="useRecording()">Usa</div>
 			<div id="save" class="systembutton pubblica ng-hide" ng-class="{'pubblica_on': currentObject.recordLength() != '0'}" ng-show="currentObject.isModifying()" ng-click="saveModify()">Salva</div>
 			<div id="publish" class="systembutton pubblica topapppubblica ng-hide" ng-class="{'pubblica_on': showPublishButtonActive}" ng-show="showPublishButton" ng-click="publishRecording()">Pubblica</div>
 		</div>
