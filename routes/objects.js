@@ -8,32 +8,33 @@ module.exports = function(Apio){
 
         },
         update: function(req, res) {
-            var object = req.body.object;
+            var object = typeof req.body.object === "string"  ? JSON.parse(req.body.object) : req.body.object;
+
             Apio.Logger.log({
                 source : 'ApioOS',
                 event : 'update',
                 value : object
-            })
+            });
             Apio.Remote.socket.emit('apio.server.object.update', object);
-            if (object.writeToDatabase === true)
+            if (object.writeToDatabase === true){
                 Apio.Database.updateProperty(object, function() {
                     //Connected clients are notified of the change in the database
                     Apio.io.emit("apio_server_update", object);
 
                 });
-            else
+            } else {
                 Apio.Util.debug("Skipping write to Database");
+            }
 
 
             //Invio i dati alla seriale se richiesto
             if (object.writeToSerial === true && ENVIRONMENT == 'production') {
                 Apio.Serial.send(object);
-            } else
+            } else {
                 Apio.Util.debug("Skipping Apio.Serial.send");
+            }
 
-
-
-
+            res.status(200).send();
         },
         getById: function(req, res) {
             Apio.Database.getObjectById(req.params.id, function(result) {
