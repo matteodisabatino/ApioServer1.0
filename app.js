@@ -179,13 +179,13 @@ var setupRemoteConnection = function() {
                             }
                             console.log('ApioOS>>>> Applications Upload successful!');
 
-                            Apio.Database.db.stats(function(err, stats){
+                            /*Apio.Database.db.stats(function(err, stats){
                                 if(err){
                                     console.log("+++++++++++++++ERROR+++++++++++++++");
                                     console.log(err);
                                 }
                                 //else if(parseInt(stats.storageSize)/1024/1024 >= 100){
-                                /*else if(stats.storageSize){
+                                else if(stats.storageSize){
                                     console.log("DB reached to maximum size, sending logs to cloud");
                                     Apio.Database.db.collection("Objects").find().toArray(function(error, objs) {
                                         if(error){
@@ -222,8 +222,8 @@ var setupRemoteConnection = function() {
                                             }
                                         }
                                     });
-                                }*/
-                            });
+                                }
+                            });*/
 
                         });
                     });
@@ -1381,7 +1381,7 @@ Apio.io.on("disconnect",function(){
             Apio.Database.db.stats(function(err, stats){
                 if(err){
                     console.log("Error while getting stats: ", err);
-                } else if(Number(stats.storageSize)/1024/1024 >= 100){
+                } else if(Number(stats.storageSize)/1024/1024 >= 100) {
                     console.log("DB reached to maximum size, sending logs to cloud");
                     Apio.Database.db.collection("Objects").find().toArray(function(error, objs){
                         if(error){
@@ -1395,8 +1395,8 @@ Apio.io.on("disconnect",function(){
                                     objectId : objs[i].objectId
                                 });
                             }
-                            Apio.Remote.socket.emit('apio.server.object.log.update', send);
-                            Apio.Database.db.collection("Objects").update({}, {$set : {log : {}}}, function(e, r){
+                            Apio.Remote.socket.emit("apio.server.object.log.update", send);
+                            Apio.Database.db.collection("Objects").update({}, { $set : { log : {} } }, { multi: true }, function(e, r){
                                 if(e){
                                     console.log("Error while updating logs", e);
                                 } else if(r){
