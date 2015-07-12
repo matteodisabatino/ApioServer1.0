@@ -18,22 +18,26 @@
 *									 *
 *************************************************************************/
 
-
-body {
+html, body {
+    height: 100%;
     font-family: helvetica !important;
 }
+#targetBody{
+	height: 100%;
+	}
 .fullscreen{
 	width: 100% !important;
 }
 /*Eventi*/
-@media (min-width: 320px) and (max-width: 600px) {
+@media (min-width: 320px) and (max-width: 667px) {
+	
     .nome_oggetto_invitato {
         font-size: 25px !important;
         margin-right: 20px;
         margin-top: -30px;
     }
 }
-@media (min-width: 601px) and (max-width: 1000px){
+@media (min-width: 668px) and (max-width: 1000px){
 
     .byStatus {
         width: 155px;
@@ -96,7 +100,7 @@ body {
 		margin-bottom: 5%;
 		position: fixed;
 		width: 100%;
-		z-index: 1000;
+		z-index: 30;
 		background-color: rgba(233, 233, 233, 0.95);	    
     }
     .newEventFormSection{
@@ -242,7 +246,7 @@ margin-top: 5%;
 	-webkit-overflow-scrolling: touch !important;
 }
 }
-@media (min-width: 601px) and (max-width: 1000px) {
+@media (min-width: 668px) and (max-width: 1000px) {
     .elenco_invitati {
         display: table;
         width: 100%;
@@ -277,8 +281,16 @@ margin-top: 5%;
         font-size: 50px;
     }
 }
-
+@media (min-width: 768px){
+	#apioMenuMobile{
+		display: none;
+	}
+	#apioMenu{
+		display: block;
+	}
+}
 @media (min-width: 1001px) {
+	#apioMenuMobile {display:none;}
 #wallContainer div{
 	margin-left: 4%;
 }
@@ -429,7 +441,7 @@ margin-top: 5%;
 }
 
 /*goForward*/
-@media (min-width: 481px) and (max-width: 600px) {
+@media (min-width: 481px) and (max-width: 667px) {
     .goForward {
         width: 155px;
         height: 155px;
@@ -465,7 +477,7 @@ margin-top: 5%;
     }
 }
 
-@media (min-width: 601px) and (max-width: 1000px) {
+@media (min-width: 668) and (max-width: 1000px) {
     .goForward {
         width: 155px;
         height: 155px;
@@ -527,7 +539,7 @@ margin-top: 5%;
 }
 
 /*goBack*/
-@media (min-width: 481px) and (max-width: 600px) {
+@media (min-width: 481px) and (max-width: 667px) {
     .goBack {
         width: 155px;
         height: 155px;
@@ -563,7 +575,7 @@ margin-top: 5%;
     }
 }
 
-@media (min-width: 601px) and (max-width: 1000px) {
+@media (min-width: 668px) and (max-width: 1000px) {
     .goBack {
         width: 155px;
         height: 155px;
@@ -625,7 +637,7 @@ margin-top: 5%;
 }
 
 /*byDate*/
-@media (min-width: 481px) and (max-width: 600px) {
+@media (min-width: 481px) and (max-width: 667px) {
     .byDate {
         width: 155px;
         height: 155px;
@@ -694,7 +706,7 @@ margin-top: 5%;
 }
 
 /*byStatus*/
-@media (min-width: 481px) and (max-width: 600px) {
+@media (min-width: 481px) and (max-width: 667px) {
     .byStatus {
         width: 155px;
         height: 155px;
@@ -756,7 +768,7 @@ margin-top: 5%;
     }
 }
 
-@media (min-width: 481px) and (max-width: 600px) {
+@media (min-width: 481px) and (max-width: 667px) {
     .createNewEvent {
         width: 155px;
         height: 155px;
@@ -792,7 +804,7 @@ margin-top: 5%;
     }
 }
 
-@media (min-width: 601px) and (max-width: 1000px) {
+@media (min-width: 668px) and (max-width: 1000px) {
     .createNewEvent {
         width: 155px;
         height: 155px;
@@ -853,7 +865,7 @@ margin-top: 5%;
     }
 }
 
-@media (min-width: 320px) and (max-width: 600px) {
+@media (min-width: 320px) and (max-width: 667px) {
     .newEventNameproprieta {
         width: 100px;
         margin: auto;
@@ -867,7 +879,7 @@ margin-top: 5%;
     }
 }
 
-@media (min-width: 601px) and (max-width: 1000px) {
+@media (min-width: 668px) and (max-width: 1000px) {
     #newEventName {
         margin-bottom: -8%;
         width: 100%;
@@ -929,7 +941,7 @@ margin-top: 5%;
     z-index: 20;
 }
 /*appName*/
-@media (min-width: 481px) and (max-width: 600px) {
+@media (min-width: 481px) and (max-width: 667px) {
     .appName {
         -webkit-transition: all 0.2s ease-in-out;
         transition: all 0.2s ease-in-out;
@@ -942,7 +954,7 @@ margin-top: 5%;
     }
 }
 
-@media (min-width: 601px) and (max-width: 1000px) {
+@media (min-width: 668px) and (max-width: 1000px) {
     .appName {
         -webkit-transition: all 0.2s ease-in-out;
         transition: all 0.2s ease-in-out;
@@ -968,7 +980,7 @@ margin-top: 5%;
     }
 }
 /*record*/
-@media (min-width: 481px) and (max-width: 600px) {
+@media (min-width: 481px) and (max-width: 667px) {
     .record {
         -webkit-transition: all 0.2s ease-in-out;
         transition: all 0.2s ease-in-out;
@@ -977,7 +989,7 @@ margin-top: 5%;
     }
 }
 
-@media (min-width: 601px) and (max-width: 1000px) {
+@media (min-width: 668px) and (max-width: 1000px) {
     .record {
         -webkit-transition: all 0.2s ease-in-out;
         transition: all 0.2s ease-in-out;
@@ -998,7 +1010,7 @@ margin-top: 5%;
 
 
 /*appApio*/
-@media only screen and (min-width: 320px) and (max-width: 600px) {
+@media only screen and (min-width: 320px) and (max-width: 667px) {
     #appApio {
         -webkit-user-drag: none;
         border-radius: 4px;
@@ -1010,7 +1022,7 @@ margin-top: 5%;
     }
 }
 
-@media only screen and (min-width: 601px) and (max-width: 1000px) {
+@media only screen and (min-width: 668px) and (max-width: 1000px) {
     #appApio {
         -webkit-user-drag: none;
         border-radius: 4px;
@@ -1102,26 +1114,51 @@ margin-top: 5%;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
+
     .apioApplicationNavbar a {
         font-size: 32px !important;
     }
+    .apioApplicationNavbar li {
+	    display: inline-table;
+		width: auto;
+		padding-left: 1%;
+		padding-right: 1%;
+		text-align: center;
+    }
 }
-@media (min-width: 481px) and (max-width: 600px) {
-    .apioApplicationNavbar a {
+@media (min-width: 481px) and (max-width: 667px) {
+     a {
         font-size: 32px;
     }
-}
-@media (min-width: 601px) and (max-width: 1000px) {
-    .apioApplicationNavbar a {
-        font-size: 40px !important;
+   .apioApplicationNavbar li {
+	    display: inline-table;
+		width: auto;
+		text-align: center;
     }
-    .apioApplicationNavbar {
-    width: 100%;
 }
+@media (min-width: 668px) and (max-width: 1000px) {
+    .apioApplicationNavbar a {
+        font-size: 30px !important;
+    }
+    .apioApplicationNavbar li {
+	    display: inline-table;
+		width: auto;
+		
+		text-align: center;
+    }
 }
 
 /*Top app oggetto inizio*/
-@media (min-width: 481px) and (max-width: 600px) {
+@media (min-width: 481px) and (max-width: 667px) {
+	#menuMobileContratto li{
+		font-size: 50px;
+		text-align: center;
+		list-style: none;
+		color: #000;
+	}
+	#menuMobileContratto li a{
+		color: #000;
+	}
     #intro_rec {
         font-size: 20px;
         height: 5px;
@@ -1195,7 +1232,16 @@ margin-top: 5%;
     }
 }
 /*iphone*/
-@media (min-width: 601px) and (max-width: 1000px) {
+@media (min-width: 668px) and (max-width: 1000px) {
+	#menuMobileContratto li{
+		font-size: 50px;
+		text-align: center;
+		list-style: none;
+		color: #000;
+	}
+	#menuMobileContratto li a{
+		color: #000;
+	}
 	.dynamicPanel {
 	display:none;
 	background-color: white;
@@ -1282,11 +1328,11 @@ margin-top: 5%;
         width: 100%;
     }
 }
-
-@media (min-width: 1001px) {
 	.apioApplicationNavbar {
     width: 100%;
 }
+@media (min-width: 1001px) {
+
     #content_menu {
         width: 100%;
         display: table;
@@ -1413,19 +1459,18 @@ position:relative;
 @media (min-width: 320px) and (max-width: 480px) {
 .apioMenuOpen{
 }
-nav#apioMenu{
+}
+@media (min-width: 320px) and (max-width: 768px){
+#apioMenu{
 /*position: fixed !important;*/
 z-index: 1 !important;
 display:none !important;
+}	
 }
 @media (min-width: 480px) and (max-width: 900px) {
 .apioMenuOpen{
 }
-nav#apioMenu{
-/*position: fixed !important;*/
-z-index: 1 !important;
-display:none !important;
-}
+
 }
 .boxProprieta{
 font-family: helvetica;
@@ -1446,7 +1491,7 @@ max-width: 180px !important;
 }
 .openAppIconStyle{
 position: fixed;
--webkit-transform: translate(-3%);
+//-webkit-transform: translate(-3%);
 }
 .openAppContainerStyle{
 
@@ -1493,9 +1538,7 @@ width:100px;
 border-radius: 0;
 position: relative;
 }
-.systemAppContainer{
-margin-top: 12%;
-}
+
 .menuTitle{
 text-transform: uppercase;
 width: 70%;
@@ -1509,7 +1552,7 @@ float: left;
 text-align: center;
 }
 
-@media (min-width: 480px) and (max-width: 600px) {
+@media (min-width: 480px) and (max-width: 667px) {
 
 .dynamicPanel {
     display:none;
@@ -1527,7 +1570,7 @@ text-align: center;
 }
 
 #ApioIconsContainer{
-padding-top: 5%;
+//padding-top: 5%;
 }
 /*#appApio{
 width: 100%;
@@ -1545,11 +1588,7 @@ float: left;
 }
 .apioMenuOpen{
 }
-nav#apioMenu{
-/*position: fixed !important;*/
-z-index: 1 !important;
-display:none !important;
-}
+
 .boxProprieta{
 font-family: helvetica;
 -webkit-transition: margin-left 0.6s ease 0s;
@@ -1616,10 +1655,12 @@ border-radius: 0;
 position: relative;
 }
 .systemAppContainer{
-margin-top: 30px;
+//margin-top: 30px;
+  height: 90%;
+  overflow-y: scroll;
 }
 }
-@media only screen and (min-width: 601px) and (max-width: 1000px) {
+@media only screen and (min-width: 668px) and (max-width: 1000px) {
 h1{
 	font-size:36px;
 	color: #262626;
@@ -1631,7 +1672,7 @@ h1{
    margin-bottom: 11%;
 }
 #ApioIconsContainer{
-padding-top: 5%;
+margin-top: 5%;
 }
 /*#appApio{
 width: 100%;
@@ -1643,7 +1684,9 @@ position: relative;
 display: none;
 }
 .systemAppContainer{
-margin-top: 30px;
+  //margin-top: 30px;
+  height: 90%;
+  overflow-y: scroll;
 }
 .stateContainer {
 border: 1px solid #DDD;
@@ -1772,7 +1815,7 @@ width: 20%;
 .menuTitle{
 }
 }
-@media (min-width: 481px) and (max-width: 600px){
+@media (min-width: 481px) and (max-width: 667px){
 #registra_statoinput{
 float: right;
 width: 70px;
@@ -1793,7 +1836,7 @@ background-size:70px;
 -webkit-background-size:70px;
 }
 }
-@media (min-width: 601px) and (max-width: 1000px){
+@media (min-width: 668px) and (max-width: 1000px){
 #registra_statoinput{
 float: right;
 width: 70px;
@@ -1846,7 +1889,7 @@ position:relative;
 /***********************************************************************************+
 bacheca
 ************************************************************************************/
-@media (min-width: 320px) and (max-width: 600px){
+@media (min-width: 320px) and (max-width: 667px){
 .name_object{
 font-size: 25px !important;
 margin-right: 20px;
@@ -1877,15 +1920,15 @@ text-align: right;
 -webkit-overflow-scrolling: touch;
 -webkit-user-drag: none;
 height: 130px;
-width: 98%;
-padding-top: 15px;
+//width: 98%;
+//padding-top: 15px;
 overflow-y: hidden;
 overflow-x: auto;
 display: block;
-padding-bottom: 0px;
-padding-left: 12px;
-padding-right: 20px;
-margin-left: 20px;
+//padding-bottom: 0px;
+//padding-left: 12px;
+//padding-right: 20px;
+//margin-left: 20px;
 }
 .elementBacheca li{
 -webkit-transition: all 0.4s ease 0s;
@@ -1925,10 +1968,10 @@ font-size: 30px;
 -webkit-transform: translateX(100%);
 }
 .statusName{
-width: 38%;
+//width: 38%;
 height: 10px;
-margin-right: 20px;
-margin-top: -15px;
+//margin-right: 20px;
+//margin-top: -15px;
 }
 #title_state{
 background: none;
@@ -1936,11 +1979,11 @@ border: none;
 font-size: 50px;
 text-align: center;
 width: 50%;
-margin-top: 5%;
+//margin-top: 5%;
 }
 }
 /*SMARTPHONE 2 (IPHONE E TABLET)*/
-@media (min-width: 601px) and (max-width: 1000px){
+@media (min-width: 668px) and (max-width: 1000px){
 .name_object{
 font-size: 25px !important;
 margin-right: 20px;
@@ -1977,14 +2020,14 @@ height: 10px;
 -webkit-overflow-scrolling: touch;
 -webkit-user-drag: none;
 height: 130px;
-width: 98%;
-padding-top: 15px;
+width: 100%;
+//padding-top: 15px;
 overflow-y: hidden;
 overflow-x: auto;
 display: block;
-padding-bottom: 0px;
-padding-left: 12px;
-margin-left: 20px;
+//padding-bottom: 0px;
+//padding-left: 12px;
+//margin-left: 20px;
 }
 .elementBacheca li{
 -webkit-transition: all 0.4s ease 0s;
@@ -2122,10 +2165,10 @@ margin-top: 5%;
     margin-top: 10px;
 }
 }
-@media (min-width: 320px) and (max-width: 600px){
+@media (min-width: 320px) and (max-width: 667px){
 }
 /*SMARTPHONE 2 (IPHONE E TABLET)*/
-@media (min-width: 601px) and (max-width: 1000px){
+@media (min-width: 668px) and (max-width: 1000px){
 .icon_app{
 display: inline-table;
 margin-top: 30px;
@@ -2165,7 +2208,13 @@ margin-left:auto;
 margin-right:auto;
 }
 }
-@media (min-width: 320px) and (max-width: 600px){
+@media (min-width: 320px) and (max-width: 667px){
+	.homeAppIconName {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 20px;
+            text-align: center;
+            width: 100%;
+        }
 .content_pulsanteiPhone{
 background: none repeat scroll 0 0 #FFFFFF;
 border-radius: 40px;
@@ -2196,8 +2245,13 @@ opacity: 1;
 }
 }
 /*SMARTPHONE 2 (IPHONE E TABLET)*/
-@media (min-width: 601px) and (max-width: 1000px){
-
+@media (min-width: 668px) and (max-width: 1000px){
+.homeAppIconName {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 20px;
+            text-align: center;
+            width: 100%;
+        }
 .content_pulsanteiPhone{
 background: none repeat scroll 0 0 #FFFFFF;
 border-radius: 40px;
@@ -2229,6 +2283,12 @@ opacity: 1;
 }
 /*PC*/
 @media (min-width: 1001px){
+	.homeAppIconName {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 14px;
+            text-align: center;
+            width: 100%;
+        }
 input[type="button"][name="iPhone"]{
 border: 0 solid;
 border-radius: 80px;
@@ -2262,7 +2322,7 @@ opacity: 1;
 /*******************
 EVENTI
 *****************/
-@media (min-width: 320px) and (max-width: 600px){
+@media (min-width: 320px) and (max-width: 667px){
 .infoEvent{
 font-size: 20px;
 padding-top: 15px;
@@ -2464,12 +2524,7 @@ margin-top: 5%;
     float: none;
 }
 
-.homeAppIconName {
-            font-family: Verdana, Geneva, sans-serif;
-            font-size: 14px;
-            text-align: center;
-            width: 100%;
-        }
+
 /*==========  Mobile First Method  ==========*/
 
     /* Custom, iPhone Retina */ 
@@ -2484,7 +2539,7 @@ margin-top: 5%;
             text-align: center;
         }
         .homeAppIconName {
-            font-size: 22px;
+            font-size: 20px;
 
         }
 
@@ -2509,27 +2564,11 @@ margin-top: 5%;
 
     }*/
 
-    /* Small Devices, Tablets */
-    @media only screen and (min-width : 768px) {
-        #apioMenuMobile {display:none;}
-        
-    }
-
-    /* Medium Devices, Desktops */
-    @media only screen and (min-width : 992px) {
-        #apioMenuMobile {display:none;}
-        
-    }
-
-    /* Large Devices, Wide Screens */
-    @media only screen and (min-width : 1200px) {
-        #apioMenuMobile {display:none;}
-       
-    }
+    
 
 
 /* Edit Event Form */
-@media (min-width: 320px) and (max-width: 600px){
+@media (min-width: 320px) and (max-width: 667px){
     .nome_nuovo_oggetto_invitato{
         font-size: 25px !important;
         margin-right: 20px;
@@ -2592,7 +2631,7 @@ margin-top: 5%;
 }
 
 /*SMARTPHONE 2 (IPHONE E TABLET)*/
-@media (min-width: 601px) and (max-width: 1000px){
+@media (min-width: 668px) and (max-width: 1000px){
     .nome_nuovo_oggetto_invitato{
         font-size: 25px !important;
         margin-right: 7px;

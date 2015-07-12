@@ -29,7 +29,9 @@ angular.module('ApioApplication')
                 });
 
 			     $("#notificationsCenter").slideUp(500);
-
+			if(document.getElementById('menuMobileContratto')){
+				document.getElementById('menuMobileContratto').classList.remove('in');
+			}
             //var startX, startY;
             //Touch event
             /*

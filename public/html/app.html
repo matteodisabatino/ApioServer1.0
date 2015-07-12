@@ -42,7 +42,7 @@
     };
     </script>
         <div id="targetBody" ng-app="ApioApplication" ng-controller="ApioMainController">
-            <nav id="apioMenu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <nav id="apioMenu" class="navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
@@ -62,60 +62,69 @@
                             <li><a href="#/events" >Events</a></li>
                             <li><a id="notificationTrigger" >Notifications</a></li>
                             <li style="float:right; padding:0.4%;">
-		                       <div class="" ng-click="shutdown()">
-				                    <div style="
-				                        border: 1px solid #CCC;
-				                        border-radius: 32px;
-				                        height: 45px;
-				                        width: 	45px;
-				                        background-size: 130%;
-				                        background-position: 50%;
-				                        background-image: url(images/shutdown.png);
-				                    "></div>
+		                       <div class="glyphicon glyphicon-off" style="font-size:30px;" ng-click="shutdown()">
+				                    
 		                		
 		                       </div>
                             </li>
                             <li style="float:right; padding:0.4%;">
-	                            <div ng-click="launchDashboard()">
-			                        <div style="
-			                            border: 1px solid #CCC;
-				                        border-radius: 32px;
-				                        height: 45px;
-				                        width: 	45px;
-				                        background-size: 100%;
-				                        background-position: 50%;
-			                            background-image: url(applications/add/icon.png);
-			                        "></div>
+	                            <div class="glyphicon glyphicon-th" style="font-size:30px;" ng-click="launchDashboard()">
+			                       
 	                            </div>
                             </li>
                         </ul>
                         </div><!-- /.navbar-collapse -->
                         </div><!-- /.container-fluid -->
                     </nav>
-                    <nav id="apioMenuMobile" class="navbar center navbar-default navbar-fixed-top" role="navigation">
-                        <div class="container-fluid">
-                            <ul class="nav navbar-nav apioApplicationNavbar">
-                            <li><a href="#/home" >Home</a></li>
-                            <li><a href="#/wall" >Bacheca</a></li>
-                            <li><a href="#/events" >Eventi</a></li>
-                            <li><a id="notificationTrigger_mobile">Notifiche</a></li>
-                        </ul>
+            <nav id="apioMenuMobile" class="navbar navbar-default navbar-fixed-bottom " >
+	            <div class="navbar-header navbar-left">
+							<button type="button" class="navbar-toggle  glyphicon glyphicon-tasks" 
+								style="font-size: 62px;
+								background: none;
+								padding: 2%;
+								margin: 0;
+								border-radius: 0;
+								border-bottom: 0;
+								border-top: 0;" 
+								data-toggle="collapse" data-target="#menuMobileContratto" aria-expanded="true"></button>
+								<div id="notificationTrigger_mobile" class="navbar-toggle glyphicon glyphicon-bell" style="font-size: 62px;
+								background: none;
+								padding: 2%;
+								margin: 0;
+								border-radius: 0;
+								border-bottom: 0;
+								border-top: 0;"></div>
+							<!--<div class="navbar-right glyphicon glyphicon-bell"><a  id="notificationTrigger_mobile">Notifiche</a></div>-->
+      
+				</div>
+                <div id="menuMobileContratto" class="container-fluid collapse navbar-collapse" style="padding-right:0; padding-left:0;">
+                            <ul class="">
+                            <li><a  href="#/home" >Home</a></li>
+                            <li><a  href="#/wall" >Bacheca</a></li>
+                            <li><a  href="#/events" >Eventi</a></li>
+							</ul>
                         </div>
-                    </nav>
+            </nav>
                     <div class="systemAppContainer">
-                        <div class="app-content" style="padding-top:25px;">
+                        <div class="app-content" >
+	                        
+	             
+
+
+
 <style>
 @media (min-width: 320px) and (max-width: 600px){
     #notificationsCenter{
-        position: absolute;
+        position: fixed;
         left: 0px;
         right: 0px;
         bottom: 0px;
-        top: 50px;
-        background-color: black;
+        top: 0px;
+        height: 92%;
+        background-color: rgba(0, 0, 0, 0.86);
         color: white;
         display: none;
-        z-index: 1045;
+        z-index: 90;
         overflow-y: scroll;
     }
 
@@ -127,6 +136,7 @@
         margin-right: auto;
         text-align: center;
         padding: 0;
+        margin-top: 5%;
         border-radius: 2000px;
         border: solid 1px rgb(88, 170, 220);
         font-size: 35px;
@@ -223,19 +233,21 @@
 }
 @media (min-width: 601px) and (max-width: 1000px){
     #notificationsCenter{
-        position: absolute;
+        position: fixed;
         left: 0px;
         right: 0px;
         bottom: 0px;
-        top: 50px;
-        background-color: black;
+        top: 0px;
+        height: 92%;
+        background-color: rgba(0, 0, 0, 0.86);
         color: white;
         display: none;
-        z-index: 1045;
+        z-index: 90;
         overflow-y: scroll;
     }
 
     .more_notification_{
+	    margin-top: 5%;
         width: 105px;
         height: 105px;
         line-height: 100px;
@@ -343,7 +355,7 @@
         right: 0px;
         bottom: 0px;
         top: 50px;
-        background-color: black;
+        background-color: rgba(0, 0, 0, 0.86);
         color: white;
         display: none;
         z-index: 1045;

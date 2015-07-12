@@ -25,14 +25,72 @@
         <link rel="shortcut icon" type="image/x-icon" href="public/apio_assets/img/favicon.ico"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="viewport" content="width=device-width, email-scalable=no, initial-scale=0.45, minimum-scale=0, maximum-scale=1">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
         <title>APIO</title>
 
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
         <style>
+		@media only screen and (min-width: 300px) and (max-width: 667px) {
+		.smartphoneLoginImageRules {
+	        display: none;
+        }
+		html {
+		    height: 100%;
+	    }
         body {
+	    height: 100%;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #fff;
+        }
+        .form-signin {
+          max-width: 100%;
+		  padding: 20px;
+		  margin: 0 auto;
+		  font-size: 18px;
+        }
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+        margin-bottom: 10px;
+        }
+        .form-signin .form-signin-heading{
+	        font-size: 24px;
+        }
+        .form-signin .checkbox {
+        font-weight: normal;
+        }
+        .form-signin .form-control {
+        position: relative;
+        height: auto;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 16px;
+        }
+        .form-signin .form-control:focus {
+        z-index: 2;
+        }
+        .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        }
+        .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        }
+
+		}
+		@media only screen and (min-width: 668px) and (max-width: 1000px) {
+			html {
+		    height: 100%;
+	    }
+        body {
+	    height: 100%;
         padding-top: 40px;
         padding-bottom: 40px;
         background-color: #fff;
@@ -71,13 +129,82 @@
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         }
+        .tabletLogin {
+	        width: 80%;
+	        height: 100%;
+	        margin-left: auto;
+	        margin-right: auto;
+        }
+        .tabletLoginImageRules {
+	        display:block;
+	        width:300px;
+	        margin:0px auto;
+        }
+
+		}
+		@media only screen and (min-width : 1001px) {
+	    html {
+		    height: 100%;
+	    }
+        body {
+	    height: 100%;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #fff;
+        }
+        .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+        }
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+        margin-bottom: 10px;
+        }
+        .form-signin .checkbox {
+        font-weight: normal;
+        }
+        .form-signin .form-control {
+        position: relative;
+        height: auto;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 16px;
+        }
+        .form-signin .form-control:focus {
+        z-index: 2;
+        }
+        .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        }
+        .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        }
+        .desktopLogin {
+	        width: 33%;
+	        height: 100%;
+	        margin-left: auto;
+	        margin-right: auto;
+        }
+        .desktopLoginImageRules {
+	        display:block;
+	        width:300px;
+	        margin:0px auto;
+	        }
+ }
         </style>
 
     </head>
     <body>
-        <div class="container" ng-app="ApioLoginApplication" ng-controller="LoginController">
+        <div class="container desktopLogin tabletLogin" ng-app="ApioLoginApplication" ng-controller="LoginController">
             <form class="form-signin" role="form" ng-hide="showSignupForm || showBoardSelection">
-                <img src="images/Apio_Logo.png" style="display:block;width:300px;margin:0px auto;"/>
+                <img class="smartphoneLoginImageRules desktopLoginImageRules tabletLoginImageRules" src="images/Apio_Logo.png" style=""/>
                 <h2 class="form-signin-heading">Please sign in</h2>
                 <div class="alert alert-danger" ng-show="$invalid" ng-cloak>Invalid email or password</div>
                 <div class="form-group">

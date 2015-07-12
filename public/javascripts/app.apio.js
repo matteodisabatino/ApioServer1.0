@@ -342,14 +342,14 @@ var apioProperty = angular.module('apioProperty', ['ApioApplication']);
         packet.properties[prop] = value;
         socket.emit('apio_client_stream',packet);
       },
-      update : function(prop,value,objectId,writeDb,writeSerial) {
+      update : function(prop,value,writeDb,writeSerial) {
         if ('undefined' == typeof writeDb)
           writeDb = true;
         if ('undefined' == typeof writeSerial)
           writeSerial = true;
         obj.properties[prop] = value;
         var o = {
-          objectId : typeof objectId !== "undefined" ? objectId : obj.objectId,
+          objectId : obj.objectId,
           properties : {
 
           },

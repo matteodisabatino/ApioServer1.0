@@ -27,7 +27,9 @@ angular.module('ApioApplication').controller('ApioWallController', ['$scope', '$
             $("#ApioApplicationContainer").html("");
         });
         $("#notificationsCenter").slideUp(500);
-
+		if(document.getElementById('menuMobileContratto')){
+		document.getElementById('menuMobileContratto').classList.remove('in');
+		}
         //Reset handlers
         $("#ApioApplicationContainer").off("touchstart");
         $("#ApioApplicationContainer").off("touchend");

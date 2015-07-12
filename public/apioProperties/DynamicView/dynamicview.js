@@ -21,7 +21,7 @@
 
 // così si crea la dipendenza di un file esterno con un app già istanziata
 var apioProperty = angular.module("apioProperty");
-apioProperty.directive("dynamicview", ["currentObject", "socket", "$timeout", function(currentObject, socket, $timeout){
+apioProperty.directive("dynamicview", ["currentObject", function(currentObject){
 	return{
 	    restrict: "E",
 	    replace: true,
