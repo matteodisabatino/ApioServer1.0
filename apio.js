@@ -381,9 +381,9 @@ module.exports = function (config) {
                 checkDongleRecive = "";
                 ApioSerialRefresh = false;
                 if (Apio.Configuration.serial.enabled) {
-                    Apio.io.emit('apio_serial_refresh', {
+                    /*Apio.io.emit('apio_serial_refresh', {
                         refresh: false
-                    });
+                    });*/
                 }
                 CCounter++;
                 if (CCounter === 3) {
@@ -401,9 +401,9 @@ module.exports = function (config) {
                 CCounter = 0;
                 ApioSerialRefresh = true;
                 if (Apio.Configuration.serial.enabled) {
-                    Apio.io.emit('apio_serial_refresh', {
+                    /*Apio.io.emit('apio_serial_refresh', {
                         refresh: true
-                    });
+                    });*/
                 }
                 setTimeout(checkGenericDongle, 15000);
                 clearInterval(checkDongle);
@@ -1857,7 +1857,8 @@ module.exports = function (config) {
                             var evt = {
                                 name: eventToCreate.name,
                                 triggerState: newState.name,
-                                type: 'stateTriggered'
+                                type: 'stateTriggered',
+                                triggeredStates: []
                             };
                             Apio.Database.db.collection('Events').findOne({
                                 name: evt.name

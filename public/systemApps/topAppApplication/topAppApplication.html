@@ -1,197 +1,679 @@
 <div>
-<!--Copyright 2014-2015 Alex Benfaremo, Alessandro Chelli, Lorenzo Di Berardino, Matteo Di Sabatino-->
+    <!--Copyright 2014-2015 Alex Benfaremo, Alessandro Chelli, Lorenzo Di Berardino, Matteo Di Sabatino-->
 
-<!---------------------------------- LICENSE -------------------------------
--									 -
-- This file is part of ApioOS.						 -
--									 -
-- ApioOS is free software released under the GPLv2 license: you can	 -
-- redistribute it and/or modify it under the terms of the GNU General	 -
-- Public License version 2 as published by the Free Software Foundation. -
--									 -
-- ApioOS is distributed in the hope that it will be useful, but		 -
-- WITHOUT ANY WARRANTY; without even the implied warranty of		 -
-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the		 -
-- GNU General Public License version 2 for more details.		 -
--									 -
-- To read the license either open the file COPYING.txt or		 -
-- visit <http://www.gnu.org/licenses/gpl2.txt>				 -
--									 -
--------------------------------------------------------------------------->
+    <!---------------------------------- LICENSE -------------------------------
+    -									 -
+    - This file is part of ApioOS.						 -
+    -									 -
+    - ApioOS is free software released under the GPLv2 license: you can	 -
+    - redistribute it and/or modify it under the terms of the GNU General	 -
+    - Public License version 2 as published by the Free Software Foundation. -
+    -									 -
+    - ApioOS is distributed in the hope that it will be useful, but		 -
+    - WITHOUT ANY WARRANTY; without even the implied warranty of		 -
+    - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the		 -
+    - GNU General Public License version 2 for more details.		 -
+    -									 -
+    - To read the license either open the file COPYING.txt or		 -
+    - visit <http://www.gnu.org/licenses/gpl2.txt>				 -
+    -									 -
+    -------------------------------------------------------------------------->
 
 
-	<style>
-		@media (min-width: 320px) and (max-width: 600px) {
-			.button-back{
-				font-size: 74px;
-				color: rgba(80, 99, 131, 0.72);
-				//border-radius: 300px;
-				border: none;
-			}
-            .go_to_home{
+    <style>
+        .rec_flag {
+            z-index: 12;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0.7;
+            background-color: #E8E8E8;
+        }
+
+        @media only screen and (min-width: 320px) and (max-width: 479px) {
+            .button-back {
+                font-size: 42px;
+                color: rgba(80, 99, 131, 0.72);
+                border: none;
+                padding: 0 !important;
+            }
+
+            .go_to_home {
                 width: 70px;
                 height: 70px;
             }
 
-			.topappbuttoncontainer{
-				width: 100%;
-			}
+            .topappbuttoncontainer {
+                width: 100%;
+            }
 
-			.topappbutton{
-				width: 155px !important;
-				height: 155px;
-				line-height: 155px;
-				margin-left: auto;
-				margin-right: auto;
-				text-align: center;
-				padding: 0;
-				border-radius: 2000px;
-				border: solid 1px rgb(88, 170, 220);
-				font-size: 35px;
-				margin-top: 20%;
-				margin-bottom: 20%;
-			}
+            .topappbutton {
+                width: 70px !important;
+                height: 70px;
+                line-height: 70px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                padding: 0;
+                border-radius: 70px;
+                border: solid 1px rgb(88, 170, 220);
+                margin-top: 20%;
+                margin-bottom: 20%;
+            }
 
-			.topappbuttonspan{
-				font-size: 35px;
-				font-family: helvetica;
-				font-weight: 300;
-			}
+            .topappbuttonspan {
+                font-size: 16px;
+                font-weight: 300;
+            }
 
-			.topapppubblica{}
-		}
-		@media (min-width: 601px) and (max-width: 1000px){
-			.button-back{
-				font-size: 74px;
-				color: rgba(80, 99, 131, 0.72);
-				//border-radius: 300px;
-				border: none;
-			}
-            .go_to_home{
+            .topapppubblica {
+            }
+
+            #eventinput, #statusinput {
+                width: 180px;
+                height: 36px;
+                border-radius: 7px;
+                font-size: 14px;
+                line-height: normal;
+                float: right;
+            }
+
+            #intro_rec {
+                height: 3px;
+                font-size: 9px;
+                line-height: 3px;
+            }
+
+            .rec {
+                background-image: url('/stylesheets/img/rec_x.png');
+                -webkit-background-size: 42px;
+                background-size: 42px;
+            }
+
+            #registra_statoinput {
+                z-index: 10;
+                float: right;
+                position: relative;
+                right: 5%;
+                width: 45px;
+                height: 45px;
+                margin-right: 2%;
+                border: solid 1px red;
+                font-size: 8px;
+                line-height: 45px;
+            }
+
+            .pubblica {
+                width: 45px !important;
+                height: 45px !important;
+                border: solid 2px rgba(75, 206, 88, 0.31) !important;
+                border-radius: 45px !important;
+                font-size: 9px;
+                line-height: 45px !important;
+                color: rgba(72, 72, 72, 0.34) !important;
+                background-image: url('') !important;
+            }
+
+            .pubblica_on {
+                width: 45px !important;
+                height: 45px !important;
+                border: solid 2px rgba(75, 206, 88) !important;
+                border-radius: 45px !important;
+                font-size: 9px;
+                line-height: 45px !important;
+                color: #fff !important;
+                background-color: rgba(62, 185, 62, 0.51) !important;
+                background-image: url('') !important;
+            }
+
+            .appName {
+                float: left;
+                width: 50%;
+                height: 45px;
+                text-align: center;
+                font-size: 22.5px;
+                line-height: 45px;
+                -webkit-transition: all 0.2s ease-in-out;
+                transition: all 0.2s ease-in-out;
+            }
+        }
+
+        @media only screen and (min-width: 480px) and (max-width: 767px) {
+            .button-back {
+                font-size: 74px;
+                color: rgba(80, 99, 131, 0.72);
+                border: none;
+            }
+
+            .go_to_home {
                 width: 70px;
                 height: 70px;
             }
 
-			.topappbuttoncontainer{
-				width: 100%;
-			}
+            .topappbuttoncontainer {
+                width: 100%;
+            }
 
-			.topappbutton{
-				width: 155px !important;
-				height: 155px;
-				line-height: 155px;
-				margin-left: auto;
-				margin-right: auto;
-				text-align: center;
-				padding: 0;
-				border-radius: 2000px;
-				border: solid 1px rgb(88, 170, 220);
-				font-size: 35px;
-				margin-top: 20%;
-				margin-bottom: 20%;
-			}
+            .topappbutton {
+                width: 155px !important;
+                height: 155px;
+                line-height: 155px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                padding: 0;
+                border-radius: 2000px;
+                border: solid 1px rgb(88, 170, 220);
+                font-size: 35px;
+                margin-top: 20%;
+                margin-bottom: 20%;
+            }
 
-			.topappbuttonspan{
-				font-size: 35px;
-				font-family: helvetica;
-				font-weight: 300;
-			}
+            .topappbuttonspan {
+                font-size: 35px;
+                font-family: helvetica;
+                font-weight: 300;
+            }
 
-			.topapppubblica{}
-		}
-		@media (min-width: 1001px){
-			.button-back{
-				font-size: 34px;
-				color: rgba(80, 99, 131, 0.72);
-				//border-radius: 300px;
-				border: none;
-			}
-            .go_to_home{
+            .topapppubblica {
+            }
+
+            #eventinput, #statusinput {
+                width: 300px;
+                height: 45px;
+                border-radius: 7px;
+                font-size: 25px;
+                line-height: normal;
+            }
+
+            #eventlabel, #statuslabel {
+                font-size: 30px;
+            }
+
+            #intro_rec {
+                height: 5px;
+                font-size: 20px;
+                line-height: 5px;
+            }
+
+            .rec {
+                background-image: url('/stylesheets/img/rec_x.png');
+                -webkit-background-size: 67px;
+                background-size: 67px;
+            }
+
+            #registra_statoinput {
+                z-index: 10;
+                float: right;
+                position: relative;
+                right: 5%;
+                width: 70px;
+                height: 70px;
+                margin-top: 10%;
+                margin-right: 2%;
+                border: solid 1px red;
+                font-size: 14px;
+                line-height: 70px;
+            }
+
+            .pubblica {
+                width: 100px !important;
+                height: 100px !important;
+                border: solid 2px rgba(75, 206, 88, 0.31) !important;
+                border-radius: 100px !important;
+                font-size: 20px;
+                line-height: 100px !important;
+                color: rgba(72, 72, 72, 0.34) !important;
+                background-image: url('') !important;
+            }
+
+            .pubblica_on {
+                width: 100px !important;
+                height: 100px !important;
+                border: solid 2px rgba(75, 206, 88) !important;
+                border-radius: 100px !important;
+                font-size: 23px;
+                line-height: 100px !important;
+                color: #fff !important;
+                background-color: rgba(62, 185, 62, 0.51) !important;
+                background-image: url('') !important;
+            }
+
+            .appName {
+                float: left;
+                width: 50%;
+                height: 100px;
+                text-align: center;
+                font-size: 50px;
+                line-height: 100px;
+                -webkit-transition: all 0.2s ease-in-out;
+                transition: all 0.2s ease-in-out;
+            }
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+            .button-back {
+                font-size: 74px;
+                color: rgba(80, 99, 131, 0.72);
+                border: none;
+            }
+
+            .go_to_home {
+                width: 70px;
+                height: 70px;
+            }
+
+            .topappbuttoncontainer {
+                width: 100%;
+            }
+
+            .topappbutton {
+                width: 155px !important;
+                height: 155px;
+                line-height: 155px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                padding: 0;
+                border-radius: 2000px;
+                border: solid 1px rgb(88, 170, 220);
+                font-size: 35px;
+                margin-top: 20%;
+                margin-bottom: 20%;
+            }
+
+            .topappbuttonspan {
+                font-size: 35px;
+                font-family: helvetica;
+                font-weight: 300;
+            }
+
+            .topapppubblica {
+            }
+
+            #eventinput, #statusinput {
+                width: 300px;
+                height: 50px;
+                border-radius: 10px;
+                font-size: 30px;
+                line-height: normal;
+            }
+
+            #intro_rec {
+                height: 5px;
+                font-size: 20px;
+                line-height: 5px;
+            }
+
+            .rec {
+                background-image: url('/stylesheets/img/rec_x.png');
+                -webkit-background-size: 69px;
+                background-size: 69px;
+            }
+
+            #registra_statoinput {
+                z-index: 10;
+                float: right;
+                position: relative;
+                right: 5%;
+                width: 70px;
+                height: 70px;
+                margin-top: 10%;
+                margin-right: 2%;
+                border: solid 1px red;
+                font-size: 14px;
+                line-height: 70px;
+            }
+
+            .pubblica {
+                width: 100px !important;
+                height: 100px !important;
+                border: solid 2px rgba(75, 206, 88, 0.31) !important;
+                border-radius: 100px !important;
+                font-size: 20px;
+                line-height: 100px !important;
+                color: rgba(72, 72, 72, 0.34) !important;
+                background-image: url('') !important;
+            }
+
+            .pubblica_on {
+                width: 100px !important;
+                height: 100px !important;
+                border: solid 2px rgba(75, 206, 88) !important;
+                border-radius: 100px !important;
+                font-size: 23px;
+                line-height: 100px !important;
+                color: #fff !important;
+                background-color: rgba(62, 185, 62, 0.51) !important;
+                background-image: url('') !important;
+            }
+
+            .appName {
+                float: left;
+                width: 50%;
+                height: 100px;
+                text-align: center;
+                font-size: 50px;
+                line-height: 100px;
+                -webkit-transition: all 0.2s ease-in-out;
+                transition: all 0.2s ease-in-out;
+            }
+        }
+
+        @media only screen and (min-width: 992px) and (max-width: 1199px) {
+            .button-back {
+                font-size: 34px;
+                color: rgba(80, 99, 131, 0.72);
+                border: none;
+            }
+
+            .go_to_home {
                 height: 60px;
                 width: 60px;
             }
 
-			.topappbuttoncontainer{
-				width: 5%;
-				margin-left: auto;
-				margin-right: auto;
-				display: table;
-			}
+            .topappbuttoncontainer {
+                width: 5%;
+                margin-left: auto;
+                margin-right: auto;
+                display: table;
+            }
 
-			.topappbutton{
-				margin: 0;
-				text-align: center;
-				padding: 0;
-				float: right;
-				width: 86px;
-				height: 86px;
-				line-height: 86px;
-				border-radius: 2000px;
-				border: solid 1px rgb(88, 170, 220);
-				margin-left: 10px;
-				margin-right: 10px;
-				margin-top: 20%;
-				margin-bottom: 20%;
-			}
+            .topappbutton {
+                margin: 0;
+                text-align: center;
+                padding: 0;
+                float: right;
+                width: 86px;
+                height: 86px;
+                line-height: 86px;
+                border-radius: 2000px;
+                border: solid 1px rgb(88, 170, 220);
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 20%;
+                margin-bottom: 20%;
+            }
 
-			.topappbuttonspan{
-				font-size: 18px;
-				font-family: helvetica;
-			}
+            .topappbuttonspan {
+                font-size: 18px;
+                font-family: helvetica;
+            }
 
-			.topapppubblica{
-				font-size: 13px;
-			}
-		}
-	</style>
-	<div class="topAppApplication">
+            .topapppubblica {
+                font-size: 13px;
+            }
+
+            #eventinput, #statusinput {
+                width: 150px;
+                height: 40px;
+                border-radius: 10px;
+                font-size: 30px;
+                line-height: normal;
+            }
+
+            .topappbutton {
+                margin: 0;
+                text-align: center;
+                padding: 0;
+                float: right;
+                width: 86px;
+                height: 86px;
+                line-height: 86px;
+                border-radius: 2000px;
+                border: solid 1px rgb(88, 170, 220);
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 20%;
+                margin-bottom: 20%;
+            }
+
+            .topappbuttonspan {
+                font-size: 18px;
+                font-family: helvetica;
+            }
+
+            .topapppubblica {
+                font-size: 13px;
+            }
+
+            #intro_rec {
+                height: 5px;
+                font-size: 10px;
+                line-height: 5px;
+            }
+
+            .rec {
+                background-image: url('/stylesheets/img/rec_x.png');
+                -webkit-background-size: 50px;
+                background-size: 50px;
+            }
+
+            #registra_statoinput {
+                z-index: 10;
+                float: right;
+                position: relative;
+                right: 12%;
+                margin-right: 2%;
+                border: solid 1px red;
+                width: 50px !important;
+                height: 50px !important;
+                line-height: 50px !important;
+            }
+
+            .pubblica {
+                width: 50px !important;
+                height: 50px !important;
+                border: solid 2px rgba(75, 206, 88, 0.31) !important;
+                border-radius: 100px !important;
+                font-size: 11px;
+                line-height: 50px !important;
+                color: rgba(72, 72, 72, 0.34) !important;
+                background-image: url('') !important;
+            }
+
+            .appName {
+                float: left;
+                width: 50% !important;
+                min-height: 100px;
+                text-align: center;
+                font-size: 15px;
+                line-height: 60px;
+                -webkit-transition: all 0.2s ease-in-out;
+                transition: all 0.2s ease-in-out;
+            }
+
+            .pubblica_on {
+                border: solid 2px rgba(75, 206, 88) !important;
+                border-radius: 100px !important;
+                font-size: 11px;
+                color: #fff !important;
+                background-color: rgba(62, 185, 62, 0.51) !important;
+                background-image: url('') !important;
+            }
+        }
+
+        @media only screen and (min-width: 1200px) {
+            .button-back {
+                font-size: 34px;
+                color: rgba(80, 99, 131, 0.72);
+                border: none;
+            }
+
+            .go_to_home {
+                height: 60px;
+                width: 60px;
+            }
+
+            .topappbuttoncontainer {
+                width: 5%;
+                margin-left: auto;
+                margin-right: auto;
+                display: table;
+            }
+
+            .topappbutton {
+                margin: 0;
+                text-align: center;
+                padding: 0;
+                float: right;
+                width: 86px;
+                height: 86px;
+                line-height: 86px;
+                border-radius: 2000px;
+                border: solid 1px rgb(88, 170, 220);
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 20%;
+                margin-bottom: 20%;
+            }
+
+            .topappbuttonspan {
+                font-size: 18px;
+                font-family: helvetica;
+            }
+
+            .topapppubblica {
+                font-size: 13px;
+            }
+
+            #eventinput, #statusinput {
+                width: 195px;
+                height: 50px;
+                border-radius: 10px;
+                font-size: 30px;
+                line-height: normal;
+                float: right;
+            }
+
+            #intro_rec {
+                height: 5px;
+                font-size: 10px;
+                line-height: 5px;
+            }
+
+            .rec {
+                background-image: url('/stylesheets/img/rec_x.png');
+                -webkit-background-size: 60px;
+                background-size: 60px;
+            }
+
+            #registra_statoinput {
+                z-index: 10;
+                float: right;
+                position: relative;
+                right: 12%;
+                margin-right: 2%;
+                border: solid 1px red;
+            }
+
+            .pubblica {
+                width: 60px !important;
+                height: 60px !important;
+                border: solid 2px rgba(75, 206, 88, 0.31) !important;
+                border-radius: 100px !important;
+                font-size: 14px;
+                line-height: 60px !important;
+                color: rgba(72, 72, 72, 0.34) !important;
+                background-image: url('') !important;
+            }
+
+            #menu_object_networkinput {
+                border: none !important;
+            }
+
+            .pubblica_on {
+                border: solid 2px rgba(75, 206, 88) !important;
+                border-radius: 100px !important;
+                font-size: 14px;
+                color: #fff !important;
+                background-color: rgba(62, 185, 62, 0.51) !important;
+                background-image: url('') !important;
+            }
+
+            .appName {
+                float: left;
+                width: 50% !important;
+                min-height: 100px;
+                text-align: center;
+                font-size: 20px;
+                line-height: 60px;
+                -webkit-transition: all 0.2s ease-in-out;
+                transition: all 0.2s ease-in-out;
+            }
+        }
+    </style>
+    <div class="topAppApplication">
         <div class="col-xs-3">
-            <div class="btn btn-default btn-lg button-back">
-                <span class="glyphicon glyphicon-circle-arrow-left" ng-show="!currentObject.isRecording() && !currentObject.isModifying() && !showPublishButton" ng-click="goBackToHome()"></span>
+            <div class="btn btn-default btn-lg button-back"
+                 ng-show="!currentObject.isRecording() && !currentObject.isModifying() && !showPublishButton"
+                 ng-click="goBackToHome()">
+                <span class="glyphicon glyphicon-circle-arrow-left"></span>
             </div>
-			<div id="menu_object_networkinput" class="systembutton pubblica ng-hide" ng-class="{'pubblica_on': currentObject.recordLength() != '0'}" ng-show="currentObject.isRecording() && !currentObject.isModifying() && !showPublishButton" ng-click="useRecording()">Usa</div>
-			<div id="save" class="systembutton pubblica ng-hide" ng-class="{'pubblica_on': currentObject.recordLength() != '0'}" ng-show="currentObject.isModifying()" ng-click="saveModify()">Salva</div>
-			<div id="publish" class="systembutton pubblica topapppubblica ng-hide" ng-class="{'pubblica_on': showPublishButtonActive}" ng-show="showPublishButton" ng-click="publishRecording()">Pubblica</div>
-		</div>
-		<div class="appName">{{object.name}}</div>
-		<div class="col-xs-3">
-			<div id="registra_statoinput" class="systembutton" ng-click="startRecording()" ng-hide="currentObject.isRecording()">
-				<span>[REC]</span>
-			</div>
-			<div id="registra_statoinput" class="systembutton rec" ng-click="stopRecording()" ng-show="currentObject.isRecording()"></div>
-		</div>
-		<div class="col-xs-12">
-			<div id="intro_rec" ng-show="currentObject.isRecording() && currentObject.recordLength() == 0" style="text-align:center;margin-bottom:10px;">Seleziona uno o più stati</div>
-			<div id="intro_rec" ng-show="currentObject.isRecording() && currentObject.recordLength() > 0"  style="text-align:center;margin-bottom:10px;">"Tap" su Usa per usare questo stato</div>
-		</div>
-	</div>
+            <div id="menu_object_networkinput" class="systembutton pubblica ng-hide"
+                 ng-class="{'pubblica_on': currentObject.recordLength() != '0'}"
+                 ng-show="currentObject.isRecording() && !currentObject.isModifying() && !showPublishButton"
+                 ng-click="useRecording()">Usa
+            </div>
+            <div id="save" class="systembutton pubblica ng-hide"
+                 ng-class="{'pubblica_on': currentObject.recordLength() != '0'}" ng-show="currentObject.isModifying()"
+                 ng-click="saveModify()">Salva
+            </div>
+            <div id="publish" class="systembutton pubblica topapppubblica ng-hide"
+                 ng-class="{'pubblica_on': showPublishButtonActive}" ng-show="showPublishButton"
+                 ng-click="publishRecording()">Pubblica
+            </div>
+        </div>
+        <div class="appName">{{object.name}}</div>
+        <div class="col-xs-3">
+            <div id="registra_statoinput" class="systembutton" ng-click="startRecording()"
+                 ng-hide="currentObject.isRecording()">
+                <span>[REC]</span>
+            </div>
+            <div id="registra_statoinput" class="systembutton rec" ng-click="stopRecording()"
+                 ng-show="currentObject.isRecording()"></div>
+        </div>
+        <div class="col-xs-12">
+            <div id="intro_rec" ng-show="currentObject.isRecording() && currentObject.recordLength() == 0"
+                 style="text-align:center;margin-bottom:10px;">Seleziona uno o più stati
+            </div>
+            <div id="intro_rec" ng-show="currentObject.isRecording() && currentObject.recordLength() > 0"
+                 style="text-align:center;margin-bottom:10px;">"Tap" su Usa per usare questo stato
+            </div>
+        </div>
+    </div>
 
-	<div ng-show="recStep === 'EventOrWall'">
-		<div class="topappbuttoncontainer">
-			<div id="wallbutton" class="topappbutton" ng-click="wallRecording()"><span class="topappbuttonspan">Bacheca</span></div>
-		</div>
-		<div class="topappbuttoncontainer">
-			<div id="eventbutton" class="topappbutton" ng-click="eventRecording()"><span class="topappbuttonspan">Eventi</span></div>
-		</div>
-	</div>
-	<div class="testoproprieta" ng-show="recStep === 'StatusNameChoice' || recStep === 'EventNameChoice'">
-		<!--Begin: Text element for status-->
-		<div id="status" class="box_proprietaiPhone">
-		    <div id="statuslabel" class="testo_proprietaiPhone">Stato:</div>
-		    <div class="testoproprieta">
-		    	<input id="statusinput" ng-change="showPublish()" ng-model="newStatusName" class="testoinput" type="text">
-			</div>
-		</div>
-		<!--End-->
-	</div>
-	<div class="testoproprieta" ng-show="recStep === 'EventNameChoice'">
-		<!--Begin: Text element for event-->
-		<div id="event" class="box_proprietaiPhone">
-		    <div id="eventlabel" class="testo_proprietaiPhone">Evento:</div>
-		    <div class="testoproprieta">
-		    	<input id="eventinput" ng-change="showPublish()" ng-model="newEventName" class="testoinput" type="text">
-			</div>
-		</div>
-		<!--End-->
-	</div>
+    <div ng-show="recStep === 'EventOrWall'">
+        <div class="topappbuttoncontainer">
+            <div id="wallbutton" class="topappbutton" ng-click="wallRecording()"><span
+                    class="topappbuttonspan">Bacheca</span></div>
+        </div>
+        <div class="topappbuttoncontainer">
+            <div id="eventbutton" class="topappbutton" ng-click="eventRecording()"><span
+                    class="topappbuttonspan">Eventi</span></div>
+        </div>
+    </div>
+    <div class="testoproprieta" ng-show="recStep === 'StatusNameChoice' || recStep === 'EventNameChoice'">
+        <!--Begin: Text element for status-->
+        <div id="status" class="box_proprietaiPhone">
+            <div id="statuslabel" class="testo_proprietaiPhone">Stato:</div>
+            <div class="testoproprieta">
+                <input id="statusinput" ng-change="showPublish()" ng-model="newStatusName" class="testoinput"
+                       type="text">
+            </div>
+        </div>
+        <!--End-->
+    </div>
+    <div class="testoproprieta" ng-show="recStep === 'EventNameChoice'">
+        <!--Begin: Text element for event-->
+        <div id="event" class="box_proprietaiPhone">
+            <div id="eventlabel" class="testo_proprietaiPhone">Evento:</div>
+            <div class="testoproprieta">
+                <input id="eventinput" ng-change="showPublish()" ng-model="newEventName" class="testoinput" type="text">
+            </div>
+        </div>
+        <!--End-->
+    </div>
 </div>

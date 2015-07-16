@@ -4,6 +4,9 @@ var uuidgen = require('node-uuid')
 module.exports = function(Apio) {
 
     return {
+        getSession: function(req, res){
+            res.status(200).send(req.session.email);
+        },
         update: function(req, res) {
 
         },

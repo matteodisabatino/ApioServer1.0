@@ -620,16 +620,17 @@ app.get("/dashboard",routes.dashboard.index);
 **/
 app.post("/apio/event",routes.events.create);
 
-app.get('/apio/notifications',routes.notifications.list);
-app.get('/apio/notifications/listDisabled',routes.notifications.listdisabled);
-app.post('/apio/notifications/markAsRead',routes.notifications.delete);
-app.post('/apio/notifications/disable',routes.notifications.disable);
-app.post('/apio/notifications/enable',routes.notifications.enable);
+    app.get('/apio/notifications/:user',routes.notifications.list);
+    app.get('/apio/notifications/listDisabled/:user',routes.notifications.listdisabled);
+    app.post('/apio/notifications/markAsRead',routes.notifications.delete);
+    app.post('/apio/notifications/disable',routes.notifications.disable);
+    app.post('/apio/notifications/enable',routes.notifications.enable);
 
 
 //Routes
 app.post('/apio/user', routes.users.create)
 app.get('/apio/user', routes.users.list)
+    app.get("/apio/user/getSession", routes.users.getSession);
 app.post('/apio/user/authenticate', routes.users.authenticate)
 app.get('/apio/user/logout', routes.users.logout)
 

@@ -23,6 +23,10 @@
 
 
 @media only screen and (min-width:1200px) {
+    #apioMenuMobile{
+        display: none;
+    }
+
     .nome_nuovo_oggetto_invitato {
         display: table;
         float: none;
@@ -131,9 +135,7 @@
         line-height: 60px;
     }
 
-    #ApioIconsContainer {
-        margin-left: 3%;
-    }
+    #ApioIconsContainer {}
 
     .testo_proprietaiPhone {
         float: left;
@@ -151,7 +153,6 @@
         width: 100%;
         height: auto;
         margin-bottom: 3%;
-        margin-left: 2%;
         padding: 10px 10px 10px 10px;
         border: solid 1px rgba(142,142,142,0.18);
         border-radius: 5px;
@@ -197,6 +198,7 @@
         line-height: 28px !important;
         -webkit-user-drag: none;
         -webkit-overflow-scrolling: touch;
+        margin-left: 2%;
     }
 
     .elementBacheca li {
@@ -583,6 +585,7 @@
         width: 48%;
         border: 0;
         opacity: 1 !important;
+        box-shadow: 0 0 0 0;
     }
 
     #byStatusinput {
@@ -608,6 +611,7 @@
         height: 100px;
         border: 0;
         opacity: 1 !important;
+        box-shadow: 0 0 0 0;
     }
 
     .eventname {

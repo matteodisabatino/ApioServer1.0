@@ -209,19 +209,18 @@ apioApplication.directive("topappapplication", ["currentObject", "socket", "$htt
 
 							if (currentObject.record().hasOwnProperty($(this).attr('id'))) {
 								alert("Il sensore "+$(this).attr('id')+" effettivamente va comunicato alla seriale")
-								var props = {
+								/*var props = {
 
 								}
-								props[$(this).attr('id')] = scope.object.properties[$(this).attr('id')]
+								props[$(this).attr('id')] = scope.object.properties[$(this).attr('id')]*/
 								var d = {
 									//isSensor : true,
 									//message : $(this).attr('id')+':'+scope.object.properties[$(this).attr('id')],
 									objectId : scope.object.objectId,
-									properties : props
-								}
-
+									properties : {}
+								};
 								d.properties[$(this).attr('id')] =scope.object.properties[$(this).attr('id')];
-								var e = $(this);
+								//var e = $(this);
 
 
 								$http.post('/apio/serial/send',{data : d})

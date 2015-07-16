@@ -47,7 +47,7 @@
         border: solid 1px #000;
         border-radius: 38px;
         font-size: 1.1em;
-        box-shadow: 0 0 2px -1px inset;
+        box-shadow: 0 0 0 0;
         transition: all 0.4s ease 0s;
     }
     .elenco_invitati {
@@ -215,12 +215,16 @@ display: table;
     }
 
     .homeAppIconName {
-        width: 65px;
-        font-size: 12px;
+        width: 75px;
+        font-size: 18px;
+    }
+
+    #apioMenu{
+        display: none;
     }
 
     #ApioIconsContainer {
-        margin-left: 5%;
+        margin-top: -10%;
     }
 
     .openPanel {
@@ -249,15 +253,19 @@ display: table;
         width:100%;
     }
 
-    .content_pulsanteiPhone {
+    /*.content_pulsanteiPhone {
         float: right;
         width: 132px;
         height: 60px;
         border-radius: 40px;
         background: none repeat scroll 0 0 #FFFFFF;
-    }
+    }*/
 
     /* wall*/
+
+    #wallContainer {
+        margin-top: -15%;
+    }
 
     .name_object {
         height: 5px;
@@ -274,11 +282,11 @@ display: table;
     .active_bacheca {
         width: 30px;
         height: 30px !important;
-        margin-top: 1px;
+        border-radius: 100px;
+        border: solid 5px rgb(255, 255, 255);
+        box-shadow: 0 0 1px 1px rgba(3, 3, 3, 0.57);
+        margin-top: 9px;
         margin-right: 5%;
-        border: solid 2px rgb(255,255,255);
-        border-radius: 30px;
-        box-shadow: 0 0 1px 1px rgba(3,3,3,0.57);
     }
 
     .activeState {
@@ -302,7 +310,7 @@ display: table;
     .elementBacheca {
         display: block;
         width: 98%;
-        height: 68px;
+        height: 75px;
         margin-left: 0px;
         padding-top: 15px;
         padding-bottom: 0;
@@ -337,7 +345,7 @@ display: table;
     .delete {
         position: absolute;
         width: 50%;
-        height: 60px !important;
+        height: 75px !important;
         margin-top: -7px;
         text-align: center;
         font-size: 14px ! important;
@@ -349,7 +357,7 @@ display: table;
     .tag {
         position: absolute;
         width: 50%;
-        height: 60px !important;
+        height: 75px !important;
         margin-top: -7px;
         text-align: center;
         font-size: 14px !important;
@@ -379,6 +387,10 @@ display: table;
             font-weight: 300;
             font-size: 25px;
         }
+
+    #ApioEventsContainer{
+        margin-top: -10%;
+    }
 
     .infoEvent {
         height: 10px;
@@ -522,20 +534,13 @@ margin-right: -6%;
         line-height: 70px;
     }
 
-    .box_byStatus {
-        display: inline-block;
-        width: 49%;
-        margin-top: 15%;
-        margin-bottom: 15%;
-        opacity: 1;
-    }
     .box_byDate {
         display: inline-block;
         opacity: 1;
-        width: 48%;
-        margin-top: 15%;
+        width: 49%;
         margin-bottom: 15%;
         border:0px;
+        box-shadow: 0 0 0 0;
     }
 
     .box_event_organization {
@@ -565,21 +570,20 @@ margin-right: -6%;
         position: relative !important;
         width: 100% !important;
         display: table !important;
-        height: 0px !important;
+        height: 0 !important;
         list-style: none !important;
-        text-align: right;
-        margin-left:0px;
-        margin-top:0px;
+        margin-left:10%;
+        margin-top:0;
         padding-right:10px !important;
     }
 
     .box_byStatus {
         display: inline-block;
         width: 49%;
-        margin-top: 15%;
         margin-bottom: 15%;
         opacity: 1;
         border:0px;
+        box-shadow: 0 0 0 0;
     }
     .elementGuests_invitati {
         display: block;
@@ -642,7 +646,7 @@ margin-left: 2%;
 border: solid 1px #000;
 transition: all 0.4s ease 0s;
 width: 35px !important;
-box-shadow: 0 0 2px -1px inset;
+box-shadow: 0 0 0 0;
 }
  .goBack {
         width: 75px;

@@ -19,6 +19,14 @@
 *************************************************************************/
 
 
+@media (min-width: 320px) and (max-width: 480px) {
+    .sensorinput {
+        float: right;
+        line-height: 40px;
+        font-size: 50px;
+    }
+}
+
 @media (min-width: 481px) and (max-width: 1000px) {
     .sensorinput {
         float: right;

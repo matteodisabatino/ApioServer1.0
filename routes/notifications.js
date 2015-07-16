@@ -1,13 +1,14 @@
 module.exports = function(Apio){
 
-	return {
+    return {
         create: function(req, res) {
             Apio.Notifications.create(req.body.notification,function(err,result){
 
             });
         },
         list: function(req, res) {
-            var currentUser = 'matteo.di.sabatino.1989@gmail.com';
+            //var currentUser = 'matteo.di.sabatino.1989@gmail.com';
+            var currentUser = req.params.user;
 
             Apio.Database.db.collection('Users').findOne({
                 email: currentUser
@@ -22,7 +23,8 @@ module.exports = function(Apio){
             })
         },
         listdisabled: function(req, res) {
-            var currentUser = 'matteo.di.sabatino.1989@gmail.com';
+            //var currentUser = 'matteo.di.sabatino.1989@gmail.com';
+            var currentUser = req.params.user;
 
             Apio.Database.db.collection('Users').findOne({
                 email: currentUser
@@ -40,7 +42,7 @@ module.exports = function(Apio){
             var notif = req.body.notification;
             var user = req.body.username;
             Apio.Database.db.collection('Users').update({
-                "username": user
+                "email": user
             }, {
                 $pull: {
                     "unread_notifications": notif
@@ -58,8 +60,11 @@ module.exports = function(Apio){
             var notif = req.body.notification;
             var user = req.body.username;
             Apio.Database.db.collection('Users').update({
-                "username": user
+                "email": user
             }, {
+                $pull: {
+                    "unread_notifications": notif
+                },
                 $push: {
                     "disabled_notification": notif
                 }
@@ -76,10 +81,13 @@ module.exports = function(Apio){
             var notif = req.body.notification;
             var user = req.body.username;
             Apio.Database.db.collection('Users').update({
-                "username": user
+                "email": user
             }, {
                 $pull: {
                     "disabled_notification": notif
+                },
+                $push: {
+                    "unread_notifications": notif
                 }
             }, function(err) {
                 if (err) {
