@@ -38,3 +38,7 @@ backup/*
 upload/*
 
 log.txt
+
+public/applications.tar.gz
+
+Identifier.apio

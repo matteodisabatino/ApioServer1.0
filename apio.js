@@ -248,9 +248,11 @@ module.exports = function (config) {
     /*
      *	 Initializes the serial port service if it isn"t initialized
      */
+     var CCounter = 0;
     Apio.Serial.init = function () {
+        CCounter=0;
+        //if (!Apio.Serial.hasOwnProperty("serialPort")) {
 
-        if (!Apio.Serial.hasOwnProperty("serialPort")) {
 
 
             //FIXME sarebbe meglio incapsulare serialPort e nasconderla dall"esterno.
@@ -286,7 +288,8 @@ module.exports = function (config) {
                         });
                     }
                     if (serialString == "c") {
-                        checkDongleRecive = "c"
+                        CCounter = CCounter+1;
+                        //checkDongleRecive = "c"
                     }
 
 
@@ -330,16 +333,14 @@ module.exports = function (config) {
 
             Apio.Serial.serialPort.on("close", function () {
                 Apio.Util.debug("APIO::SERIAL::CLOSED");
-                var d = new Date(),
-                    ms = d.getMilliseconds();
-                fs.appendFile(__dirname + '/log.txt', d + ", " + ms + ": SERIAL PORT CLOSED (0)\n", function (err) {
-                    if (err) {
-                        console.log("ERROR WHILE APPENDING ON FILE LOG.TXT");
-                    }
-                });
+                      Apio.Serial.init();
+  
+
+
+                //Apio.Serial.init();
             });
             return Apio.Serial.serialPort;
-        }
+
     };
     /*
      *	Take a JSON in input and split it into a regular Apio Codifica string
@@ -350,7 +351,7 @@ module.exports = function (config) {
 
      //Coda di messaggi da inviare con la seriale
      */
-    Apio.Serial.queue = [];
+    /*Apio.Serial.queue = [];
     Apio.Serial.available = true;
     Apio.Serial.counter = 0;
 
@@ -384,7 +385,7 @@ module.exports = function (config) {
                     /*Apio.io.emit('apio_serial_refresh', {
                         refresh: false
                     });*/
-                }
+            /*    }
                 CCounter++;
                 if (CCounter === 3) {
                     Apio.Serial.serialFlag = true;
@@ -404,12 +405,13 @@ module.exports = function (config) {
                     /*Apio.io.emit('apio_serial_refresh', {
                         refresh: true
                     });*/
-                }
+              /*  }
                 setTimeout(checkGenericDongle, 15000);
                 clearInterval(checkDongle);
             }
         }, 3000);
     }
+    /*
 
     console.log("+++++++Sto per labciare checkGenericDongle+++++++");
 
@@ -498,7 +500,7 @@ module.exports = function (config) {
              });
              }
              });*/
-            Apio.Serial.serialPort = new com.SerialPort(Apio.Configuration.serial.port, {
+            /*Apio.Serial.serialPort = new com.SerialPort(Apio.Configuration.serial.port, {
                 baudrate: Apio.Configuration.serial.baudrate,
                 parser: com.parsers.readline("\r\n")
             });
@@ -881,10 +883,65 @@ module.exports = function (config) {
             });
         }
     }, 10000);
+    */
+    Apio.Serial.queue = [];
+Apio.Serial.available = true;
+Apio.Serial.ms = new Date().getTime();
+Apio.Serial.exMs= Apio.Serial.ms;
+
+Apio.Serial.cMs = new Date().getTime();
+Apio.Serial.exCMs = Apio.Serial.cMs;
+
+
+var ApioDongleDisconnect = false;
+var trovato = 0;
+
+//Ciclo che gestisce la coda
+setInterval(function() {
+    com.list(function (err, ports) {
+      if (err) {
+        Apio.Util.debug("Unable to get serial ports, error: ", err);
+      } else {
+        ports.forEach(function (port) {
+        //console.log(port);
+        if(String(port.manufacturer) === "Apio Dongle" ||String(port.manufacturer) === "Apio_Dongle"){
+          Apio.Configuration.serial.port = String(port.comName);
+          //Apio.Serial.init();
+        }
+      });
+      }
+    });
+    Apio.Serial.cMs = new Date().getTime();
+    //console.log(CCounter);
+    if(Apio.Serial.cMs-Apio.Serial.exCMs>=3000){
+      //console.log("Sono passati 10 secondi")
+      if(CCounter<1){
+        //console.log("La seriale sembra non rispondere");
+        //ReOpen SerialPort
+        Apio.Serial.init();
+
+      } else {
+        CCounter = 0;
+      }
+      Apio.Serial.exCMs = new Date().getTime();
+
+    }
+    if (Apio.Serial.queue.length > 0 && Apio.Serial.available == true) {
+        Apio.Serial.available = false;
+        var messageToSend = Apio.Serial.queue.shift();
+        console.log("Apio.Serial.queue is processing: " + messageToSend)
+        Apio.Serial.serialPort.write(messageToSend, function(error) {
+            if (error)
+                console.log("An error has occurred while sending " + messageToSend)
+            else
+                console.log("The message '" + messageToSend + "' was correctly written to serial")
+            Apio.Serial.available = true;
+        })
+    }
+}, 50)
 
 
     Apio.Serial.stream = function (data, callback) {
-
         function doTheStreaming(protocol, address, key, value, callback) {
 
 
@@ -897,6 +954,11 @@ module.exports = function (config) {
                     if (!Apio.Serial.hasOwnProperty("serialPort")) {
                         console.log("The serial port is disabled, the following message cannot be sent: " + message);
                     } else {
+                      Apio.Serial.ms = new Date().getTime();
+                      //console.log("Apio Serial MS: "+Apio.Serial.ms);
+                      //console.log("Apio Serial exMs "+Apio.Serial.exMs);
+
+                      if(Apio.Serial.ms-Apio.Serial.exMs>=4){
                         Apio.Serial.serialPort.write(message, function (err) {
                             if (err) {
                                 console.log("An error has occurred while streaming to serialport.")
@@ -904,6 +966,9 @@ module.exports = function (config) {
                                 console.log("The message " + message + " was correctly streamed to serial port")
                             }
                         })
+                        Apio.Serial.exMs = new Date().getTime();
+                        console.log("exMs: "+Apio.Serial.exMs);
+                      }
                     }
                     break;
                 default:
@@ -960,7 +1025,7 @@ module.exports = function (config) {
                 case 's':
                     if (!Apio.Serial.hasOwnProperty("serialPort")) {
                         console.log("The serial port is disabled, the following message cannot be sent: " + message);
-                    } else if (CCounter >= 3) {
+                    } else /*if (CCounter >= 3)*/ {
                         Apio.Serial.queue.push(message);
                     }
                     break;

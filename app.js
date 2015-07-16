@@ -430,7 +430,7 @@ if (Apio.Configuration.serial.enabled === true){
     } else {
       ports.forEach(function (port) {
       console.log(port);
-      if(String(port.manufacturer) === configuration.serial.manufacturer){
+      if(String(port.manufacturer) === "Apio Dongle" ||String(port.manufacturer) === "Apio_Dongle"){
         configuration.serial.port = String(port.comName);
         Apio.Serial.init();
       }
