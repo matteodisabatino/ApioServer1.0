@@ -411,47 +411,22 @@ angular.module('ApioDashboardApplication')
   this.parserIno = function(objectToParse){
     console.log('Parsing object ' + objectToParse + ' for .ino');
      this.ino='';
-     if(objectToParse.microType=="General")
-     {
-        this.ino += '\n';
-        this.ino += '#include "apioGeneral.h"\n';
-     }
      if(objectToParse.protocol=='l'){
        //declare LWM libraries
        this.ino += '\n';
-       this.ino += '#include "atmegarfr2.h"\n';
-       this.ino += '#include "config.h"\n';
-       this.ino += '#include "hal.h"\n';
-       this.ino += '#include "halTimer.h"\n';
-       this.ino += '#include "nwk.h"\n';
-       this.ino += '#include "nwkCommand.h"\n';
-       this.ino += '#include "nwkDataReq.h"\n';
-       this.ino += '#include "nwkFrame.h"\n';
-       this.ino += '#include "nwkGroup.h"\n';
-       this.ino += '#include "nwkRoute.h"\n';
-       this.ino += '#include "nwkRouteDiscovery.h"\n';
-       this.ino += '#include "nwkRx.h"\n';
-       this.ino += '#include "nwkSecurity.h"\n';
-       this.ino += '#include "nwkTx.h"\n';
-       this.ino += '#include "phy.h"\n';
-       this.ino += '#include "sys.h"\n';
-       this.ino += '#include "sysConfig.h"\n';
-       this.ino += '#include "sysEncrypt.h"\n';
-       this.ino += '#include "sysTimer.h"\n';
-       this.ino += '#include "sysTypes.h"\n';
-       this.ino += '\n';
-       this.ino += '#include "ApioLwm.h"\n';
+       this.ino += '#include "Apio.h"\n';
+       this.ino += '#include "property.h"\n';
 
      } else if(objectToParse.protocol=='z'){
        //declare XBee libraries
        this.ino +="#include <XBee.h>\n#include <ApioXbee.h>\n";
      }
-     for(key in objectToParse.properties){
+     /*for(key in objectToParse.properties){
       if(objectToParse.properties[key].type=="Sensor"){
         this.ino +='#include "sensors.h"\n';
         break;
       }
-     }
+    }
      for(key in objectToParse.properties){
       if(objectToParse.properties[key].type=="Sensor"){
         this.ino+='ApioList '+objectToParse.properties[key].name+'= new ApioListNode;\n';
@@ -463,21 +438,17 @@ angular.module('ApioDashboardApplication')
         this.ino+='int '+objectToParse.properties[key].name+'Val =0;\n\n';
       }
 
-     }
+    }*/
      for(key in objectToParse.pins){
        //declare Pins type name = value
        this.ino += "int "+objectToParse.pins[key].name+"="+objectToParse.pins[key].number+";\n";
      }
      this.ino += "void setup() {\n";
-     if(objectToParse.microType=="General")
-     {
-      this.ino += "\tgeneralSetup();\n"
-     }
      if(objectToParse.protocol=='l')
      {
        //initialize LWM
-       this.ino += "\tapioSetup("+objectToParse.address+");\n";
-       this.ino += '\tapioSend("'+objectToParse.address+':hi::-");\n';
+       this.ino += '\tApio.setup("'+objectToParse.objectName+'", "1,0", '+objectToParse.address+', 0x01);\n';
+
 
      }else if(objectToParse.protocol=='z'){
        //initialize XBee
@@ -492,7 +463,7 @@ angular.module('ApioDashboardApplication')
      this.ino += "}\n\n";
      this.ino += "void loop(){\n";
      if(objectToParse.protocol=='l'){
-       this.ino+="\tapioLoop();\n";
+       this.ino+="\tApio.loop();\n";
      }
      if(objectToParse.protocol=='z'){
        this.ino+="\tapioLoop();\n";
@@ -502,24 +473,12 @@ angular.module('ApioDashboardApplication')
 
        if(objectToParse.properties[key].type=="Trigger")
        {
-        this.ino += '\tif(property=="'+objectToParse.properties[key].name+'"){\n';
-        console.log(objectToParse.properties[key]);
-         this.ino +='\t\tif(value=="'+objectToParse.properties[key].on+'"){\n';
          for(keyPin in objectToParse.pins){
-            if(objectToParse.pins[keyPin].propertyType === 'Trigger' && objectToParse.properties[key].name===objectToParse.pins[keyPin].propertyName){
-              this.ino += '\t\t\tdigitalWrite('+objectToParse.pins[keyPin].name+',HIGH);\n'
-            }
+           if(objectToParse.pins[keyPin].propertyType === 'Trigger' && objectToParse.properties[key].name===objectToParse.pins[keyPin].propertyName){
+            this.ino += '\tproperty.Trigger("'+objectToParse.properties[key].name+'",'+objectToParse.pins[keyPin].name+' ,'+objectToParse.properties[key].on+', '+objectToParse.properties[key].off+' );\n';
+          }
+
          }
-         this.ino += '\t\t\t//Do Something\n\t\t}\n';
-         this.ino +='\t\tif(value=="'+objectToParse.properties[key].off+'"){\n';
-         for(keyPin in objectToParse.pins){
-            if(objectToParse.pins[keyPin].propertyType === 'Trigger' && objectToParse.properties[key].name===objectToParse.pins[keyPin].propertyName){
-              this.ino += '\t\t\tdigitalWrite('+objectToParse.pins[keyPin].name+',LOW);\n'
-            }
-         }
-         this.ino += '\t\t\t//Do Something\n\t\t}\n';
-         this.ino += '\t\t\tproperty=="";\n\t\t\n';
-         this.ino += '\t}\n';
        }
        else if(objectToParse.properties[key].type=="List")
        {
@@ -534,15 +493,12 @@ angular.module('ApioDashboardApplication')
        }
        else if(objectToParse.properties[key].type=="Slider")
        {
-          this.ino += '\tif(property=="'+objectToParse.properties[key].name+'"){\n';
-          for(keyPin in objectToParse.pins){
-            if(objectToParse.pins[keyPin].propertyType === 'Slider' && objectToParse.properties[key].name===objectToParse.pins[keyPin].propertyName){
-              this.ino += '\t\t\tanalogWrite('+objectToParse.pins[keyPin].name+',value.toInt());\n'
-            }
-         }
-         this.ino += '\t\t\tproperty=="";\n\t\t\n';
-          this.ino += '\t}\n';
+         for(keyPin in objectToParse.pins){
+           if(objectToParse.pins[keyPin].propertyType === 'Slider' && objectToParse.properties[key].name===objectToParse.pins[keyPin].propertyName){
+            this.ino += '\tproperty.Slider("'+objectToParse.properties[key].name+'",'+objectToParse.pins[keyPin].name+');\n';
+          }
 
+         }
        }
        else if(objectToParse.properties[key].type=="Sensor")
        {
@@ -572,7 +528,7 @@ angular.module('ApioDashboardApplication')
                while(digitalRead(pin5) == LOW)
               {
                 SYS_TaskHandler();
-                if(flagEnter==0){  
+                if(flagEnter==0){
                   if(toggle==0)
                   {
                     apioSend("6:update:onoff5:0-");
@@ -585,7 +541,7 @@ angular.module('ApioDashboardApplication')
                   }
                 delay(250);
                 flagEnter=1;
-                }  
+                }
               }
         */
         for(keyPin in objectToParse.pins){
