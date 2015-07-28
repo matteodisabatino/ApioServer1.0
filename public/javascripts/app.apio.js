@@ -28,8 +28,7 @@ Apio.Socket.init();
 //Fixare questo scempio con la dependency injection
 Apio.appWidth = parseInt($("#ApioApplicationContainer").css('width'),10);
 Apio.newWidth = parseInt($("#ApioApplicationContainer").css('width'),10);
-Apio.currentApplication = {};
-Apio.currentApplication.subapps = {};
+Apio.currentApplication = 0;
 
 $("#notificationTrigger").on('click',function() {
   $( "#notificationsCenter" ).toggle( "slide",{ direction : 'up'}, 500 );
@@ -422,7 +421,8 @@ var apioProperty = angular.module('apioProperty', ['ApioApplication']);
 
 ApioApplication.controller("ApioMainController", ["$scope", "$http", "socket", "sweet", function ($scope, $http,socket, sweet) {
     socket.on("apio_serial_refresh", function (data) {
-        if(data.refresh === true){
+
+	        /*if(data.refresh === true){
             var time = 25;
             sweet.show({
                 title: "Allineamento in corso, tempo rimasto: 25 secondi",
@@ -457,6 +457,7 @@ ApioApplication.controller("ApioMainController", ["$scope", "$http", "socket", "
         } else if(data.refresh === false){
             sweet.close();
         }
+        */
     });
      $scope.launchDashboard = function() {
             window.location = 'dashboard#/home'

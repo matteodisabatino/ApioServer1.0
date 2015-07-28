@@ -21,10 +21,18 @@
 
 /* Extra Small Devices, Phones */
 @media only screen and (min-width:480px) and (max-width:767px) {
+    .systemAppContainer{
+        margin-bottom: 10%;
+    }
+
     h1 {
     font-size:24px;
 }
-
+.testoProprietaNomeStato{
+		width: 100%;
+		display: table-cell;
+		text-align: right;
+	}
     .no_box_proprieta_iPhone {
     display: block;
     width: auto;
@@ -162,23 +170,26 @@ display: table;
         background: none;
     }
     .testo_proprietaiPhone {
-        float: left;
         margin-left: 4.5px;
-        font-family: sans-serif;
-        font-size: 22px;
-        font-weight: 100;
-        color: #262626;
+		font-family: sans-serif;
+		font-size: 22px;
+		display: table-cell;
+		vertical-align: middle;
+		height: 40px;
+		font-weight: 100;
+		color: #262626;
+		padding: 2%;
     }
 
     .systembutton {
         float: right;
-        width: 45px;
-        height: 45px;
+        width: 100px;
+        height: 100px;
         margin-right: 1%;
         margin-left: 1%;
         padding: 0;
         border: solid 1px rgb(88,170,220);
-        border-radius: 45px;
+        border-radius: 100px;
         text-align: center;
         line-height: 45px;
     }

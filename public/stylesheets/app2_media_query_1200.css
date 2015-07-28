@@ -23,6 +23,15 @@
 
 
 @media only screen and (min-width:1200px) {
+    .fullscreen{
+        width: 100% !important;
+    }
+
+    .wall_open_edit_state{
+        width: 65% !important;
+        margin:0 !important;
+    }
+
     #apioMenuMobile{
         display: none;
     }
@@ -112,15 +121,21 @@
     }
 
     .testo_proprietaiPhone {
-        float: left;
-        margin-right: 5px;
-        margin-left: 10px;
-        font-family: sans-serif;
-        font-size: 25px;
-        line-height: 50px;
-        color: #262626;
+	    text-align: left;
+	    margin-right: 5px;
+	    margin-left: 10px;
+	    font-family: sans-serif;
+	    font-size: 20px;
+	    line-height: 25px;
+	    color: #262626;
+	    display: table-cell;
+	    vertical-align: middle;
     }
-
+	.testoProprietaNomeStato{
+		width: 100%;
+		display: table-cell;
+		text-align: right;
+	}
     .systembutton {
         float: right;
         width: 60px;
@@ -137,21 +152,11 @@
 
     #ApioIconsContainer {}
 
-    .testo_proprietaiPhone {
-        float: left;
-        margin-right: 5px;
-        margin-left: 10px;
-        font-family: sans-serif;
-        font-size: 18px;
-        line-height: 50px;
-        color: #262626;
-    }
 
     .box_proprietaiPhone {
-        display: table-caption;
-        display: inline-table;
+        display: table;
         width: 100%;
-        height: auto;
+        min-height: 70px;
         margin-bottom: 3%;
         padding: 10px 10px 10px 10px;
         border: solid 1px rgba(142,142,142,0.18);

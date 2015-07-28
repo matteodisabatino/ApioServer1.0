@@ -1,5 +1,13 @@
 <div>
     <style>
+        .red {
+            background-color: #FF0000 !important;
+        }
+
+        .yellow {
+            background-color: #FFFF00 !important;
+        }
+
         @media only screen and (max-width: 767px) {
             .image-dimensions{
                 height: 75px;
@@ -49,18 +57,16 @@
     ---------------------------------------------------------------------------->
 
     <div id="ApioIconsContainer" class="row">
-        <!--<div class="icon_app row" ng-repeat="obj in objects" ng-click="goToApplication(obj.objectId)">-->
-        <div class="col-xs-4 col-sm-3 col-md-2" ng-repeat="obj in objects" ng-click="goToApplication(obj.objectId)" style="text-align: center;">
-            <!--<div class="col-xs-4 col-sm-3 col-md-2">-->
+        <!--<div class="col-xs-4 col-sm-3 col-md-2" ng-repeat="obj in objects" ng-click="goToApplication(obj.objectId)" style="text-align: center;">-->
+        <div class="col-xs-4 col-sm-3 col-md-2" ng-repeat="obj in objects" ng-click="launchApplicationSimple(obj.objectId)" style="text-align: center;">
             <div style="display: inline-block;">
                 <div class="home">
-                    <div class="image-dimensions" style="border: 1px solid #CCC; border-radius: 145px; background-color: #0CCD33; background-size: 100%; background-position: 50%; background-image: url(applications/{{obj.objectId}}/icon.png);"></div>
+                    <div class="image-dimensions" ng-class="{'red' : obj.status === '0', 'yellow' : obj.status === '2'}" style="border: 1px solid #CCC; border-radius: 145px; background-color: #0CCD33; background-size: 100%; background-position: 50%; background-image: url(applications/{{obj.objectId}}/icon.png); cursor: pointer;"></div>
                 </div>
-                <div style="margin-top: 8px; width: 100%; height:40px;">
+                <div style="cursor: pointer; margin-top: 8px; width: 100%; height:40px;">
                     <div class="homeAppIconName">{{obj.name}}</div>
                 </div>
             </div>
-            <!--</div>-->
         </div>
     </div>
 </div>

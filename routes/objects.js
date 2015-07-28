@@ -1,6 +1,26 @@
 module.exports = function(Apio){
 
 	return {
+        addNotification : function(req, res){
+            var data = typeof req.body.data === "string"  ? JSON.parse(req.body.data) : req.body.data;
+            var update = {};
+
+            for(var i in data.properties){
+                for(var j in data.properties[i]){
+                    update["notifications."+i+"."+j] = data.properties[i][j];
+                }
+            }
+
+            Apio.Database.db.collection("Objects").update({objectId : data.objectId}, {$set : update}, function(error, result){
+                if(error){
+                    console.log("Unable to update object with objectId "+data.objectId, error);
+                    res.status(500).send();
+                } else if(result){
+                    console.log("Added notification ", update, " on object with objectId "+data.objectId);
+                    res.status(200).send();
+                }
+            });
+        },
         create: function(req, res) {
 
         },

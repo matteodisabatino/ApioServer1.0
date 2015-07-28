@@ -200,6 +200,7 @@ module.exports = function(Apio){
 	    var js = req.body.js;
 	    var makefile = req.body.makefile;
 	    var icon = req.body.icon;
+        var subapps = req.body.subapps;
 	    console.log('icon: ')
 	    console.log(icon)
 	    console.log('makefile: '+makefile);
@@ -269,6 +270,14 @@ module.exports = function(Apio){
 	            fs.writeFileSync('public/applications/'+obj.objectId+'/' + obj.objectId + '.js',js);
 	            fs.writeFileSync('public/applications/'+obj.objectId+'/' + obj.objectId + '.mongo',mongo);
 	            fs.writeFileSync('public/applications/'+obj.objectId+'/icon.png',decodeBase64Image(icon).data);
+
+                if(subapps && Object.keys(subapps).length){
+                    fs.mkdirSync("public/applications/" + obj.objectId + "/subapps");
+                    for(var i in subapps){
+                        fs.writeFileSync("public/applications/" + obj.objectId + "/subapps/" + i + ".html", subapps[i]["html"]);
+                        fs.writeFileSync("public/applications/" + obj.objectId + "/subapps/" + i + ".js", subapps[i]["js"]);
+                    }
+                }
 	            //fs.writeFileSync('public/applications/'+obj.objectId+'/' + obj.objectId + '.json',JSON.stringify(objectToSave));
 
 	            //Injection of the libraries file in the sketch folder
@@ -652,19 +661,30 @@ module.exports = function(Apio){
                             console.log(JSON.stringify(object.mongo))
 
                             fs.mkdirSync(path +'/'+ dummy);
+                            console.log("CREATA CARTELLA PRINCIPALE");
                             fs.mkdirSync(path +'/'+ dummy + '/_' + dummy);
+                            console.log("CREATA CARTELLA PER INO");
                             if(object.hasOwnProperty('adapter')){
 								fs.writeFileSync(path+dummy+'/adapter.js',req.body.adapter);
+                                console.log("CREATO ADAPTER");
 							}
                             fs.writeFileSync(path+'/'+dummy+'/icon.png',object.icon, {encoding: 'base64'});
+                            console.log("CREATA ICONA");
                             fs.writeFileSync(path+'/'+dummy+'/' + dummy + '.html',object.html);
+                            console.log("CREATO HTML");
                             fs.writeFileSync(path+'/'+dummy+'/' + dummy + '.js',object.js);
+                            console.log("CREATO JS");
                             //fs.writeFileSync(path+'/'+dummy+'/' + dummy + '.mongo',JSON.stringify(object.mongo));
                             fs.writeFileSync(path+'/'+dummy+'/' + dummy + '.mongo',appoggio);
+                            console.log("CREATO MONGO");
                             fs.writeFileSync(path+'/'+dummy+'/_' + dummy + '/_' + dummy + '.ino',object.ino);
+                            console.log("CREATO INO");
                             fs.writeFileSync(path+'/'+dummy+'/_' + dummy + '/Makefile',object.makefile);
+                            console.log("CREATO MAKEFILE");
                             fs.writeFileSync(path+'/'+dummy+'/' + dummy + '.json',object.json);
+                            console.log("CREATO TEMP");
                             deleteFolderRecursive('./temp');
+                            console.log("ELIMINATA CARTELLA TEMP");
                             res.send({id:dummy});
                         }
                     });

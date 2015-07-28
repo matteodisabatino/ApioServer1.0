@@ -1,23 +1,23 @@
 <div>
     <!--Copyright 2014-2015 Alex Benfaremo, Alessandro Chelli, Lorenzo Di Berardino, Matteo Di Sabatino-->
 
-    <!---------------------------------- LICENSE -------------------------------
-    -									 -
-    - This file is part of ApioOS.						 -
-    -									 -
-    - ApioOS is free software released under the GPLv2 license: you can	 -
-    - redistribute it and/or modify it under the terms of the GNU General	 -
-    - Public License version 2 as published by the Free Software Foundation. -
-    -									 -
-    - ApioOS is distributed in the hope that it will be useful, but		 -
-    - WITHOUT ANY WARRANTY; without even the implied warranty of		 -
-    - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the		 -
-    - GNU General Public License version 2 for more details.		 -
-    -									 -
-    - To read the license either open the file COPYING.txt or		 -
-    - visit <http://www.gnu.org/licenses/gpl2.txt>				 -
-    -									 -
-    -------------------------------------------------------------------------->
+    <!---------------------------------- LICENSE --------------------------------
+    -                                                                           -
+    - This file is part of ApioOS.                                              -
+    -                                                                           -
+    - ApioOS is free software released under the GPLv2 license: you can         -
+    - redistribute it and/or modify it under the terms of the GNU General       -
+    - Public License version 2 as published by the Free Software Foundation.    -
+    -                                                                           -
+    - ApioOS is distributed in the hope that it will be useful, but             -
+    - WITHOUT ANY WARRANTY; without even the implied warranty of                -
+    - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the              -
+    - GNU General Public License version 2 for more details.                    -
+    -                                                                           -
+    - To read the license either open the file COPYING.txt or                   -
+    - visit <http://www.gnu.org/licenses/gpl2.txt>                              -
+    -                                                                           -
+    ---------------------------------------------------------------------------->
 
 
     <style>
@@ -33,6 +33,11 @@
         }
 
         @media only screen and (min-width: 320px) and (max-width: 479px) {
+	        .backArrow{
+		        height: 30px;
+			    display: table-cell;
+			    vertical-align: middle;
+	        }
             .button-back {
                 font-size: 42px;
                 color: rgba(80, 99, 131, 0.72);
@@ -81,9 +86,12 @@
             }
 
             #intro_rec {
-                height: 3px;
-                font-size: 9px;
-                line-height: 3px;
+                    height: auto;
+				    width: 50%;
+				    margin-left: auto;
+				    font-size: 13px;
+				    line-height: 17px;
+				    margin-right: auto;
             }
 
             .rec {
@@ -94,18 +102,16 @@
 
             #registra_statoinput {
                 z-index: 10;
-                float: right;
-                position: relative;
-                right: 5%;
-                width: 45px;
-                height: 45px;
-                margin-right: 2%;
-                border: solid 1px red;
-                font-size: 8px;
-                line-height: 45px;
+				float: right;
+				position: relative;
+				right: 12%;
+				font-size: 25px;
+				color: #ff3c50;
+				margin-right: 2%;
             }
 
             .pubblica {
+	            float: left !important;
                 width: 45px !important;
                 height: 45px !important;
                 border: solid 2px rgba(75, 206, 88, 0.31) !important;
@@ -128,19 +134,29 @@
                 background-image: url('') !important;
             }
 
-            .appName {
-                float: left;
-                width: 50%;
-                height: 45px;
-                text-align: center;
-                font-size: 22.5px;
-                line-height: 45px;
-                -webkit-transition: all 0.2s ease-in-out;
-                transition: all 0.2s ease-in-out;
-            }
-        }
+            .appName{
+	            line-height: 20px;
+			    display: table-cell;
+			    vertical-align: middle;
+			    top: 0;
+			    left: 0;
+			    right: 0;
+			    bottom: 0;
+			    width: 1%;
+			    height: 30px;
+			    -webkit-transition: all 0.2s ease-in-out;
+			    transition: all 0.2s ease-in-out;
+			    margin: 0 auto;
+
+			}        
+}
 
         @media only screen and (min-width: 480px) and (max-width: 767px) {
+	        .backArrow{
+		        height: 30px;
+			    display: table-cell;
+			    vertical-align: middle;
+	        }
             .button-back {
                 font-size: 74px;
                 color: rgba(80, 99, 131, 0.72);
@@ -193,32 +209,32 @@
             }
 
             #intro_rec {
-                height: 5px;
-                font-size: 20px;
-                line-height: 5px;
+                height: auto;
+				    width: 50%;
+				    margin-left: auto;
+				    font-size: 13px;
+				    line-height: 17px;
+				    margin-right: auto;
             }
 
             .rec {
                 background-image: url('/stylesheets/img/rec_x.png');
-                -webkit-background-size: 67px;
-                background-size: 67px;
+                -webkit-background-size: 100px;
+                background-size: 100px;
             }
 
             #registra_statoinput {
                 z-index: 10;
-                float: right;
-                position: relative;
-                right: 5%;
-                width: 70px;
-                height: 70px;
-                margin-top: 10%;
-                margin-right: 2%;
-                border: solid 1px red;
-                font-size: 14px;
-                line-height: 70px;
+				float: right;
+				position: relative;
+				right: 12%;
+				font-size: 25px;
+				color: #ff3c50;
+				margin-right: 2%;
             }
 
             .pubblica {
+	            float: left !important;
                 width: 100px !important;
                 height: 100px !important;
                 border: solid 2px rgba(75, 206, 88, 0.31) !important;
@@ -241,17 +257,23 @@
                 background-image: url('') !important;
             }
 
-            .appName {
-                float: left;
-                width: 50%;
-                height: 100px;
-                text-align: center;
-                font-size: 50px;
-                line-height: 100px;
-                -webkit-transition: all 0.2s ease-in-out;
-                transition: all 0.2s ease-in-out;
-            }
-        }
+            .appName{
+	            line-height: 25px;
+	            font-size: 30px;
+	            margin: 0 auto;
+				width: 20%;
+	            display: table-cell;
+				vertical-align: middle;
+				top: 0;
+				text-align: center;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				height: 30px;
+				-webkit-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+			}        
+		}
 
         @media only screen and (min-width: 768px) and (max-width: 991px) {
             .button-back {
@@ -302,32 +324,32 @@
             }
 
             #intro_rec {
-                height: 5px;
-                font-size: 20px;
-                line-height: 5px;
+                height: auto;
+				    width: 50%;
+				    margin-left: auto;
+				    font-size: 13px;
+				    line-height: 17px;
+				    margin-right: auto;
             }
 
             .rec {
                 background-image: url('/stylesheets/img/rec_x.png');
                 -webkit-background-size: 69px;
-                background-size: 69px;
+                background-size: 100px;
             }
 
             #registra_statoinput {
                 z-index: 10;
-                float: right;
-                position: relative;
-                right: 5%;
-                width: 70px;
-                height: 70px;
-                margin-top: 10%;
-                margin-right: 2%;
-                border: solid 1px red;
-                font-size: 14px;
-                line-height: 70px;
+				float: right;
+				position: relative;
+				right: 12%;
+				font-size: 25px;
+				color: #ff3c50;
+				margin-right: 2%;
             }
 
             .pubblica {
+	            float: left !important;
                 width: 100px !important;
                 height: 100px !important;
                 border: solid 2px rgba(75, 206, 88, 0.31) !important;
@@ -350,17 +372,22 @@
                 background-image: url('') !important;
             }
 
-            .appName {
-                float: left;
-                width: 50%;
-                height: 100px;
-                text-align: center;
-                font-size: 50px;
-                line-height: 100px;
-                -webkit-transition: all 0.2s ease-in-out;
-                transition: all 0.2s ease-in-out;
-            }
-        }
+            .appName{
+	            line-height: 20px;
+	            display: table-cell;
+				vertical-align: middle;
+				top: 0;
+				margin: 0 auto;
+				width: 20%;
+				font-size: 30px;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				height: 30px;
+				-webkit-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+			}        
+		}
 
         @media only screen and (min-width: 992px) and (max-width: 1199px) {
             .button-back {
@@ -440,9 +467,12 @@
             }
 
             #intro_rec {
-                height: 5px;
-                font-size: 10px;
-                line-height: 5px;
+                height: auto;
+				    width: 50%;
+				    margin-left: auto;
+				    font-size: 13px;
+				    line-height: 17px;
+				    margin-right: auto;
             }
 
             .rec {
@@ -453,17 +483,16 @@
 
             #registra_statoinput {
                 z-index: 10;
-                float: right;
-                position: relative;
-                right: 12%;
-                margin-right: 2%;
-                border: solid 1px red;
-                width: 50px !important;
-                height: 50px !important;
-                line-height: 50px !important;
+				float: right;
+				position: relative;
+				right: 12%;
+				font-size: 25px;
+				color: #ff3c50;
+				margin-right: 2%;
             }
 
             .pubblica {
+	            float: left !important;
                 width: 50px !important;
                 height: 50px !important;
                 border: solid 2px rgba(75, 206, 88, 0.31) !important;
@@ -474,17 +503,20 @@
                 background-image: url('') !important;
             }
 
-            .appName {
-                float: left;
-                width: 50% !important;
-                min-height: 100px;
-                text-align: center;
-                font-size: 15px;
-                line-height: 60px;
-                -webkit-transition: all 0.2s ease-in-out;
-                transition: all 0.2s ease-in-out;
-            }
-
+            .appName{
+	            line-height: 20px;
+	            display: table-cell;
+				vertical-align: middle;
+				top: 0;
+				margin: 0 auto;
+				width: 20%;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				height: 30px;
+				-webkit-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+			}
             .pubblica_on {
                 border: solid 2px rgba(75, 206, 88) !important;
                 border-radius: 100px !important;
@@ -549,9 +581,12 @@
             }
 
             #intro_rec {
-                height: 5px;
-                font-size: 10px;
-                line-height: 5px;
+                height: auto;
+				    width: 50%;
+				    margin-left: auto;
+				    font-size: 13px;
+				    line-height: 17px;
+				    margin-right: auto;
             }
 
             .rec {
@@ -562,14 +597,16 @@
 
             #registra_statoinput {
                 z-index: 10;
-                float: right;
-                position: relative;
-                right: 12%;
-                margin-right: 2%;
-                border: solid 1px red;
+				float: right;
+				position: relative;
+				right: 12%;
+				font-size: 25px;
+				color: #ff3c50;
+				margin-right: 2%;
             }
 
             .pubblica {
+	            float: left !important;
                 width: 60px !important;
                 height: 60px !important;
                 border: solid 2px rgba(75, 206, 88, 0.31) !important;
@@ -593,29 +630,37 @@
                 background-image: url('') !important;
             }
 
-            .appName {
-                float: left;
-                width: 50% !important;
-                min-height: 100px;
-                text-align: center;
-                font-size: 20px;
-                line-height: 60px;
-                -webkit-transition: all 0.2s ease-in-out;
-                transition: all 0.2s ease-in-out;
-            }
-        }
+            .appName{
+	            display: table-cell;
+				vertical-align: middle;
+				line-height: 20px;
+				top: 0;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				width: 1%;
+				bottom: 0;
+				height: 30px;
+				-webkit-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+			}      
+			.personalizaChevron{
+				font-size: 25px;
+				float: left;
+			}  
+	}
     </style>
     <div class="topAppApplication">
-        <div class="col-xs-3">
-            <div class="btn btn-default btn-lg button-back"
+        <div class="col-xs-3" style="display:table-cell;">
+            <div class="backArrow"
                  ng-show="!currentObject.isRecording() && !currentObject.isModifying() && !showPublishButton"
                  ng-click="goBackToHome()">
-                <span class="glyphicon glyphicon-circle-arrow-left"></span>
+                <span style="float:left;" class="glyphicon glyphicon-chevron-left personalizaChevron"></span>
             </div>
-            <div id="menu_object_networkinput" class="systembutton pubblica ng-hide"
+            <div id="menu_object_networkinput" class="glyphicon glyphicon-ok pubblica ng-hide"
                  ng-class="{'pubblica_on': currentObject.recordLength() != '0'}"
                  ng-show="currentObject.isRecording() && !currentObject.isModifying() && !showPublishButton"
-                 ng-click="useRecording()">Usa
+                 ng-click="useRecording()">
             </div>
             <div id="save" class="systembutton pubblica ng-hide"
                  ng-class="{'pubblica_on': currentObject.recordLength() != '0'}" ng-show="currentObject.isModifying()"
@@ -626,11 +671,13 @@
                  ng-click="publishRecording()">Pubblica
             </div>
         </div>
+        <div class="col-xs-6" style="display:table-cell;">
         <div class="appName">{{object.name}}</div>
+        </div>
         <div class="col-xs-3">
-            <div id="registra_statoinput" class="systembutton" ng-click="startRecording()"
+            <div id="registra_statoinput" class="glyphicon glyphicon-flag" ng-click="startRecording()"
                  ng-hide="currentObject.isRecording()">
-                <span>[REC]</span>
+                
             </div>
             <div id="registra_statoinput" class="systembutton rec" ng-click="stopRecording()"
                  ng-show="currentObject.isRecording()"></div>
@@ -645,19 +692,31 @@
         </div>
     </div>
 
-    <div ng-show="recStep === 'EventOrWall'">
-        <div class="topappbuttoncontainer">
-            <div id="wallbutton" class="topappbutton" ng-click="wallRecording()"><span
-                    class="topappbuttonspan">Bacheca</span></div>
-        </div>
-        <div class="topappbuttoncontainer">
-            <div id="eventbutton" class="topappbutton" ng-click="eventRecording()"><span
-                    class="topappbuttonspan">Eventi</span></div>
-        </div>
-    </div>
-    <div class="testoproprieta" ng-show="recStep === 'StatusNameChoice' || recStep === 'EventNameChoice'">
+    <div class="testoproprieta" ng-show="recStep === 'StatusNameChoice'">
         <!--Begin: Text element for status-->
         <div id="status" class="box_proprietaiPhone">
+            <div id="statuslabel" class="testo_proprietaiPhone">Stato:</div>
+            <div class="testoProprietaNomeStato">
+                <input id="statusinput" ng-change="showPublish()" ng-model="newStatusName" class="testoinput"
+                       type="text">
+            </div>
+        </div>
+        <!--End-->
+    </div>
+
+        <!--<div ng-show="recStep === 'EventOrWall'">
+            <div class="topappbuttoncontainer">
+                <div id="wallbutton" class="topappbutton" ng-click="wallRecording()"><span
+                        class="topappbuttonspan">Bacheca</span></div>
+            </div>
+            <div class="topappbuttoncontainer">
+                <div id="eventbutton" class="topappbutton" ng-click="eventRecording()"><span
+                        class="topappbuttonspan">Eventi</span></div>
+            </div>
+        </div>
+        <div class="testoproprieta" ng-show="recStep === 'StatusNameChoice' || recStep === 'EventNameChoice'">
+            <!--Begin: Text element for status-->
+        <!--<div id="status" class="box_proprietaiPhone">
             <div id="statuslabel" class="testo_proprietaiPhone">Stato:</div>
             <div class="testoproprieta">
                 <input id="statusinput" ng-change="showPublish()" ng-model="newStatusName" class="testoinput"
@@ -665,15 +724,15 @@
             </div>
         </div>
         <!--End-->
-    </div>
+    <!--</div>
     <div class="testoproprieta" ng-show="recStep === 'EventNameChoice'">
         <!--Begin: Text element for event-->
-        <div id="event" class="box_proprietaiPhone">
+        <!--<div id="event" class="box_proprietaiPhone">
             <div id="eventlabel" class="testo_proprietaiPhone">Evento:</div>
             <div class="testoproprieta">
                 <input id="eventinput" ng-change="showPublish()" ng-model="newEventName" class="testoinput" type="text">
             </div>
         </div>
         <!--End-->
-    </div>
+    <!--</div>-->
 </div>

@@ -1,6 +1,6 @@
 module.exports = function(Apio){
 
-    return {
+	return {
         create: function(req, res) {
             Apio.Notifications.create(req.body.notification,function(err,result){
 

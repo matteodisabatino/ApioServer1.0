@@ -20,27 +20,32 @@
 
 
 @media only screen and (min-width: 320px) and (max-width: 480px) {
-    .numeroproprieta {}
+    .numeroproprieta {
+	        display: table-cell;
+			vertical-align: middle;
+    }
 
     .numeroinput {
-        margin: auto;
-        float: right;
-        //width: 150px;
-        width: 100%;
-        height: 50px;
-        text-align: center;
-        font-size: 40px;
-        border-radius: 16px;
-        -webkit-appearance: none;
-        font-family: sans-serif;
-        font-weight: 100;
-        border: 1px solid #4197FF;
-        box-shadow: 0 0 3px -1px;
-        color: rgba(3, 3, 3, 0.7);
+	    margin: auto;
+	    float: right;
+	    width: 100%;
+	    height: 50px;
+	    text-align: center;
+	    font-size: 23px;
+	    border-radius: 16px;
+	    -webkit-appearance: none;
+	    font-family: sans-serif;
+	    font-weight: 100;
+	    border: 1px solid #4197FF;
+	    box-shadow: 0 0 3px -1px;
+	    color: rgba(3, 3, 3, 0.7);
     }
 }
 @media only screen and (min-width: 481px) and (max-width: 768px) {
-    .numeroproprieta {}
+    .numeroproprieta {
+	    display: table-cell;
+		vertical-align: middle;
+    }
 
     .numeroinput {
         margin: auto;
@@ -67,7 +72,7 @@
         box-shadow: 0 0 3px -1px;
         color: rgba(3, 3, 3, 0.7);
         //width: 100px;
-        width: 100%;
+        width: 35%;
         height: 50px;
         text-align: center;
         float: right;

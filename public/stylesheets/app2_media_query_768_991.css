@@ -27,8 +27,18 @@
     h1 {
         font-size: 24px;
     }
+	.testoProprietaNomeStato{
+		width: 100%;
+		display: table-cell;
+		text-align: right;
+	}
+    .nav_event{
+        height: 90px;
+    }
 
-
+    .editEventFormSection{
+        height: 125px;
+    }
 
     .no_box_proprieta_iPhone {
         display: block;
@@ -173,13 +183,13 @@
 
     .systembutton {
         float: right;
-        width: 45px;
-        height: 45px;
+        width: 100px;
+        height: 100px;
         margin-right: 1%;
         margin-left: 1%;
         padding: 0;
         border: solid 1px rgb(88,170,220);
-        border-radius: 45px;
+        border-radius: 100px;
         text-align: center;
         line-height: 45px;
     }
@@ -233,6 +243,7 @@
     .box_proprietaiPhone {
         display: table;
         width: 100%;
+        min-height: 70px;
         padding: 20px 14px 20px 14px;
         line-height: 36px;
         box-shadow: 0 5px 4px -7px;
@@ -370,6 +381,7 @@
         width: 66%;
         height: 10px;
         margin-right: 20px;
+        margin-top: -1%;
     }
     #wallContainer {
         margin-top:-30px;
@@ -632,7 +644,7 @@
         float: right;
         width: 100px;
         height: 60px;
-        margin-top: -45px;
+        margin-top: -55px;
         margin-left: 40%;
         text-align: center;
         font-size: 20px;

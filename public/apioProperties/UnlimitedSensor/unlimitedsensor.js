@@ -79,8 +79,8 @@ apioProperty.directive("unlimitedsensor", ["currentObject", "socket", "$http", f
             });
 
             //Se il controller modifica l'oggetto allora modifico il model;
-            scope.$watch("object.properties."+attrs["propertyname"], function(){
-                scope.model = scope.object.properties[attrs["propertyname"]];
+            scope.$watch("object.properties."+attrs["propertyname"], function(newValue, oldValue){
+                scope.model = newValue;
             });
             //
 
@@ -95,9 +95,10 @@ apioProperty.directive("unlimitedsensor", ["currentObject", "socket", "$http", f
             scope.show_sensor = false;
             //
 
-            scope.$watch('model', function(){
-                setValue();
-            });
+            /*scope.$watch('model', function(){
+             setValue();
+             });*/
+
 
             function setValue(){
                 var el = $(elem).find("input");
@@ -112,14 +113,19 @@ apioProperty.directive("unlimitedsensor", ["currentObject", "socket", "$http", f
             }
             //
 
-            var event = attrs["event"] ? attrs["event"] : "mouseup touchend";
+            $(elem).find("input").on("blur", function(){
+                setValue();
+            });
+
+            var event = attrs["event"] ? attrs["event"] : "keyup";
             elem.on(event, function(){
                 //Aggiorna lo scope globale con il valore che è stato modificato nel template
+
                 scope.object.properties[attrs["propertyname"]] = scope.model;
+                scope.$apply();
                 //
+
                 if(!currentObject.isRecording()){
-
-
                     //Se è stato definito un listener da parte dell'utente lo eseguo altrimenti richiamo currentObject.update che invia i dati al DB e alla seriale
                     scope.$parent.$eval(attrs["listener"]);
                     //
@@ -131,6 +137,7 @@ apioProperty.directive("unlimitedsensor", ["currentObject", "socket", "$http", f
 
                     //Esegue codice javascript contenuto nei tag angular; dovendo modificare i valori dell'input bisogna dare a scope.$apply la funzione read
                     scope.$apply(read);
+                    //scope.$apply();
                     //
                 }
             });

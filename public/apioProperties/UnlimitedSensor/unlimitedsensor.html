@@ -18,13 +18,21 @@
     - visit <http://www.gnu.org/licenses/gpl2.txt>				 -
     -									 -
     -------------------------------------------------------------------------->
-
+<div class="containerUnlimetedSensor">
+<div class="desktopRuleTable">
 
     <link type="text/css" rel="stylesheet" href="apioProperties/UnlimitedSensor/unlimitedsensor.css"/>
     <div id="{{propertyname}}flag" ng-show="currentObject.isRecording()  && !isRecorded()" ng-click="addPropertyToRecording()" class="rec_flag"></div>
     <div id="{{propertyname}}label" class="testo_proprietaiPhone" ng-click="removePropertyFromRecording()">{{label}}</div>
     <div ng-model="model" class="sensorinput">{{model}}</div>
-    <div>
-        <input id="{{propertyname}}sensor" ng-show="currentObject.isRecording() && isRecorded()" ng-model="model" class="modify-sensor" type="text">
+    
     </div>
+<div class="">
+	<div style="width:80%; margin: 0 auto; margin-top: 6%;">
+        <input id="{{propertyname}}sensor" ng-show="currentObject.isRecording() && isRecorded()" ng-model="model" class="modify-sensor" type="text">
+	</div>
+</div>
+    
+</div>
+
 </div>

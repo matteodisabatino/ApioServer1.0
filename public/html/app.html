@@ -26,7 +26,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="public/apio_assets/img/favicon.ico"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <!--<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.45, minimum-scale=0, maximum-scale=1">-->
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=0, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,8 +34,6 @@
     <link rel="apple-touch-icon" href="html/apple-touch-icon.png"/>
     <link rel="apple-touch-icon-precomposed" href="html/apple-touch-icon.png"/>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <!--<link rel="stylesheet" href="/stylesheets/pulsanti.css"/>
-    <link rel="stylesheet" href="/stylesheets/app.css"/>-->
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap-sweetalert/lib/sweet-alert.css">
 
     <link rel="stylesheet" href="/stylesheets/app2.css"/>
@@ -47,6 +44,9 @@
     <link rel="stylesheet" href="/stylesheets/app2_media_query_1200.css"/>
 </head>
 <body>
+<div id="apioWaitLoading" class="apioWaitLoadingOff">
+	<div class="glyphicon glyphicon-refresh apioWaitLoading"></div>
+</div>
 <div id="targetBody" ng-app="ApioApplication" ng-controller="ApioMainController">
     <nav id="apioMenu" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
@@ -69,15 +69,10 @@
                     <li><a href="#/events">Events</a></li>
                     <li><a id="notificationTrigger">Notifications</a></li>
                     <li style="float:right; padding:0.4%;">
-                        <div class="glyphicon glyphicon-off" style="font-size:30px;" ng-click="shutdown()">
-
-
-                        </div>
+                        <div class="glyphicon glyphicon-off" style="font-size:30px;" ng-click="shutdown()"></div>
                     </li>
                     <li style="float:right; padding:0.4%;">
-                        <div class="glyphicon glyphicon-th" style="font-size:30px;" ng-click="launchDashboard()">
-
-                        </div>
+                        <div class="glyphicon glyphicon-th" style="font-size:30px;" ng-click="launchDashboard()"></div>
                     </li>
                 </ul>
             </div>
@@ -85,10 +80,10 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <nav id="apioMenuMobile" class="navbar navbar-default navbar-fixed-bottom ">
+    <nav id="apioMenuMobile" class="navbar navbar-default navbar-fixed-bottom">
         <div class="navbar-header navbar-left">
             <button type="button" class="navbar-toggle  glyphicon glyphicon-tasks"
-                    style="font-size: 40px;
+                    style="font-size: 35px;
 								background: none;
 								padding: 2%;
 								margin: 0;
@@ -96,7 +91,7 @@
 								border-bottom: 0;
 								border-top: 0;"
                     data-toggle="collapse" data-target="#menuMobileContratto" aria-expanded="true"></button>
-            <div id="notificationTrigger_mobile" class="navbar-toggle glyphicon glyphicon-bell" style="font-size: 40px;
+            <div id="notificationTrigger_mobile" class="navbar-toggle glyphicon glyphicon-bell" style="font-size: 35px;
 								background: none;
 								padding: 2%;
 								margin: 0;
@@ -108,7 +103,7 @@
         </div>
         <div id="menuMobileContratto" class="container-fluid collapse navbar-collapse"
              style="padding-right:0; padding-left:0;">
-            <ul class="">
+            <ul class="apioApplicationNavbar">
                 <li><a href="#/home">Home</a></li>
                 <li><a href="#/wall">Bacheca</a></li>
                 <li><a href="#/events">Eventi</a></li>
@@ -120,30 +115,54 @@
 
 
             <style>
+                html, body {
+                    height: 100%;
+                }
+
+                .scrollable {
+                    -webkit-overflow-scrolling: touch;
+                    height: 100%;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                }
+
                 @media (min-width: 320px) and (max-width: 600px) {
+                    .apioApplicationNavbar {
+                        padding: 0;
+                    }
+
+                    #menuMobileContratto li, a {
+                        list-style: none;
+                        font-size: 35px;
+                        color: #000;
+                        text-align: center;
+                    }
+
                     #notificationsCenter {
                         position: fixed;
                         left: 0px;
                         right: 0px;
                         bottom: 0px;
                         top: 0px;
-                        height: 92%;
+                        height: 91%;
                         background-color: rgba(0, 0, 0, 0.86);
                         color: white;
                         display: none;
-                        z-index: 90;
+                        z-index: 200;
                         overflow-y: scroll;
+                        overflow-x: hidden;
                     }
 
                     .more_notification_ {
-                        width: 105px;
-                        height: 105px;
-                        line-height: 100px;
+                        width: 60px;
+                        height: 60px;
+                        line-height: 57px;
                         margin-left: auto;
                         margin-right: auto;
                         text-align: center;
                         padding: 0;
                         margin-top: 5%;
+                        margin-bottom: 5%;
                         border-radius: 2000px;
                         border: solid 1px rgb(88, 170, 220);
                         font-size: 35px;
@@ -171,9 +190,10 @@
                         transition: all 0.4s ease 0s;
                         font-family: sans-serif;
                         font-size: 14px;
-                        height: 90px;
+                        height: 20px;
                         display: table-caption !important;
                         float: left;
+                        line-height: 1;
                         list-style: none;
                         width: 66%;
                         margin-right: 20px;
@@ -191,7 +211,6 @@
                         font-size: 14px !important;
                         margin-right: 85%;
                         height: 10px;
-                        margin-top: -20%
                     }
 
                     .notifypublishbutton {
@@ -215,8 +234,7 @@
                         position: absolute;
                         height: 160px !important;
                         margin-top: -80px;
-                        line-height: 160px;
-                        font-size: 30px;
+                        font-size: 20px;
                         -webkit-transform: translateX(100%);
                     }
 
@@ -246,7 +264,7 @@
                         right: 0px;
                         bottom: 0px;
                         top: 0px;
-                        height: 92%;
+                        height: 85%;
                         background-color: rgba(0, 0, 0, 0.86);
                         color: white;
                         display: none;
@@ -289,14 +307,14 @@
                         -webkit-transition: all 0.4s ease 0s;
                         transition: all 0.4s ease 0s;
                         font-family: sans-serif;
-                        font-size: 30px;
+                        font-size: 25px;
                         height: 90px;
                         display: table-caption !important;
                         float: left;
                         list-style: none;
                         width: 66%;
                         margin-right: 20px;
-                        margin-top: -5%;
+                        margin-top: -4%;
 
                     }
 
@@ -307,10 +325,10 @@
                         display: table-caption !important;
                         float: left;
                         list-style: none;
-                        font-size: 30px !important;
+                        font-size: 20px !important;
                         margin-right: 85%;
                         height: 10px;
-                        margin-top: -10%
+                        margin-top: -4%
                     }
 
                     .notifypublishbutton {
@@ -360,11 +378,11 @@
 
                 @media (min-width: 1001px) {
                     #notificationsCenter {
-                        position: absolute;
+                        position: fixed;
                         left: 0px;
                         right: 0px;
                         bottom: 0px;
-                        top: 50px;
+                        top: 60px;
                         background-color: rgba(0, 0, 0, 0.86);
                         color: white;
                         display: none;
@@ -516,7 +534,7 @@
 </div>
 <!-- fine app -->
 
-<div id="ApioApplicationContainer" class="dynamicPanel" style=""></div>
+<div id="ApioApplicationContainer" class="dynamicPanel scrollable" style=""></div>
 </body>
 
 
