@@ -1029,6 +1029,9 @@ setInterval(function() {
                         Apio.Serial.queue.push(message);
                     }
                     break;
+                case "py":
+                    Apio.io.emit("apio_python_serial_emit", data);
+                    break;
                 default:
                     if (fs.existsSync(__dirname + "/public/applications/" + data.objectId + "/adapter.js")) {
                         var adapter = require(__dirname + "/public/applications/" + data.objectId + "/adapter.js");
@@ -1749,7 +1752,7 @@ setInterval(function() {
                 throw new Apio.Database.Error("Apio.Database.updateProperty() the object with id " + objectId + "  does not exist.");
             } else {
                 Apio.Util.debug("Apio.Database.updateProperty() Successfully updated the  object " + objectId);
-                if (callback !== null)
+                if (callback)
                     callback();
             }
 
@@ -1853,7 +1856,7 @@ setInterval(function() {
                 throw new Apio.Database.Error("Apio.Database.getObjects() Unable to fetch an object with id " + id);
             }
             Apio.Util.debug("Apio.Database.getObjectById() Objects Successfully fetched.");
-            if (callback !== null)
+            if (callback)
                 callback(result);
         });
 
@@ -1877,7 +1880,7 @@ setInterval(function() {
                 throw new Apio.Database.Error("Apio.Database.getObjectId() Unable to fetch an object with id " + id);
             }
             Apio.Util.debug("Apio.Database.getObjectById() Object Successfully fetched (id : " + id + ")");
-            if (callback !== null)
+            if (callback)
                 callback(result);
 
         });
@@ -2786,7 +2789,7 @@ setInterval(function() {
         console.log("Ciao, sono Apio..System.notify e mi è arrivata questa notifica")
         notification.timestamp = (new Date()).getTime();
         console.log(notification);
-        Apio.Remote.socket.emit('apio.server.notification', notification)
+        //Apio.Remote.socket.emit('apio.server.notification', notification)
         if (notification.properties == "online") {
             Apio.io.emit('apio_notification', notification);
             Apio.Remote.socket.emit('apio.server.notification', notification)
@@ -2803,20 +2806,23 @@ setInterval(function() {
                                 break;
                             }
                         }
-                        if (true) {
+                        if (flag === false) {
+                            notification.user = data[i].email;
+                            Apio.io.emit('apio_notification', notification);
+                            Apio.Remote.socket.emit('apio.server.notification', notification)
                             Apio.Database.db.collection('Users').update({
                                 "email": data[i].email
                             }, {
                                 $push: {
                                     "unread_notifications": notification
                                 }
-                            }, function (err, data) {
+                            }, function (err, data_) {
                                 if (err)
                                     console.log("Apio.System.notify Error, unable to send the notification");
                                 else {
                                     console.log("Emitto la notifica");
-                                    Apio.io.emit('apio_notification', notification);
-                                    Apio.Remote.socket.emit('apio.server.notification', notification)
+                                    //Apio.io.emit('apio_notification', notification);
+                                    //Apio.Remote.socket.emit('apio.server.notification', notification)
                                     if (callback)
                                         callback();
                                 }
