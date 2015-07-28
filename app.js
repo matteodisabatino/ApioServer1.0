@@ -636,40 +636,34 @@ app.get('/apio/user/logout', routes.users.logout)
 
 
     app.post('/apio/notify',function(req,res){
-        console.log("REQ");
-        console.log(req.body);
+        var object = typeof req.body.object === "string"  ? JSON.parse(req.body.object) : req.body.object;
 
-        Apio.Database.db.collection('Objects').findOne({objectId : req.body.objectId}, function(err, data){
-        //Apio.Database.db.collection('Objects').findOne({objectId : "1000"}, function(err, data){
+        Apio.Database.db.collection('Objects').findOne({objectId : object.objectId}, function(err, data){
             if(err){
-                console.log("Unable to find object with id "+req.body.objectId);
-                //console.log("Unable to find object with id 1000");
+                console.log("Unable to find object with id "+object.objectId);
             }
             else{
+                var key = Object.keys(object.properties)[0];
                 var notifica = {
-                    objectId : req.body.objectId,
-                    //objectId : "1000",
+                    objectId : object.objectId,
                     timestamp : new Date().getTime(),
+                    message : object.message || data.notifications[key][object.properties[key]],
                     objectName : data.name,
-                    properties : {}
+                    properties : object.properties
                 };
-                for(var i in req.body){
-                    if(i !== "objectId"){
-                        notifica.properties[i] = req.body[i];
-                        notifica.message = data.notifications[i][req.body[i]];
-                    }
-                }
+                console.log("notifica vale: ", notifica);
                 Apio.System.notify(notifica);
                 Apio.Database.db.collection("States").findOne({objectId : notifica.objectId, properties : notifica.properties}, function(err, foundState){
                     if(err){
                         console.log("Unable to find States for objectId "+notifica.objectId);
                     }
                     else if(foundState){
-                        var stateHistory = {};
+                        Apio.State.apply(foundState.name);
+                        /*var stateHistory = {};
 
                         var getStateByName = function(stateName,callback) {
                             Apio.Database.db.collection('States').findOne({name : stateName},callback);
-                        };
+                        };*/
                         //Mi applica lo stato se non è già stato applicato
                         /*var applyStateFn = function(stateName) {
 
@@ -755,7 +749,7 @@ app.get('/apio/user/logout', routes.users.logout)
                          console.log("Skipping State application because of loop.")
                          }
                          } //End of applyStateFn*/
-                        var arr = [];
+                        /*var arr = [];
                         var applyStateFn = function(stateName, callback, eventFlag) {
                             console.log("\n\nApplico lo stato "+stateName+"\n\n")
                             if (!stateHistory.hasOwnProperty(stateName)) { //se non è nella history allora lo lancio
@@ -869,11 +863,13 @@ app.get('/apio/user/logout', routes.users.logout)
                                 }
                                 arr = [];
                             }
-                        }, false);
+                        }, false);*/
                     }
                 });
             }
         });
+        
+        res.status(200).send();
     });
 
 /* Returns all the events */
@@ -894,40 +890,57 @@ app.post("/apio/state/apply",routes.states.apply);
     res.send({});
 });*/
 
-app.delete("/apio/state/:name",function(req,res){
-    console.log("Mi arriva da eliminare questo: "+req.params.name)
-    Apio.Database.db.collection("States").findAndRemove({name : req.params.name}, function(err,removedState){
+app.delete("/apio/state/:name", function (req, res) {
+    console.log("Mi arriva da eliminare questo: " + req.params.name);
+    Apio.Database.db.collection("States").findAndRemove({name: req.params.name}, function (err, removedState) {
         if (!err) {
-            Apio.io.emit("apio_state_delete", {name : req.params.name});
-            Apio.Database.db.collection("Events").remove({triggerState : req.params.name}, function(err){
-                if(err){
-                    res.send({error : 'DATABASE_ERROR'});
+            Apio.io.emit("apio_state_delete", {name: req.params.name});
+            Apio.Database.db.collection("Events").remove({triggerState: req.params.name}, function (err) {
+                if (err) {
+                    res.send({error: 'DATABASE_ERROR'});
                 }
-                else{
-                    Apio.io.emit("apio_event_delete", {name : req.params.name});
+                else {
+                    Apio.io.emit("apio_event_delete", {name: req.params.name});
                 }
             });
+
+            Apio.Database.db.collection("Objects").findOne({objectId : removedState.objectId}, function(error, result){
+                if(error){
+                    console.log("Unable to find object with objectId "+removedState.objectId);
+                } else if(result){
+                    var notifications = result.notifications;
+
+                    for(var i in removedState.properties){
+                        delete notifications[i][removedState.properties[i]];
+                    }
+
+                    Apio.Database.db.collection("Objects").update({objectId : removedState.objectId}, {$set:{notifications : notifications}}, function(err, res){
+                        if(err){
+                            console.log("Unable to update object with objectId "+removedState.objectId);
+                        } else if(res){
+                            console.log("Notification successfully deleted");
+                        }
+                    });
+                }
+            });
+
             if (removedState.hasOwnProperty('sensors')) {
-
-              removedState.sensors.forEach(function(e,i,a){
-                var props = {};
-                props[e] = removedState.properties[e];
-                Apio.Serial.send({
-                  'objectId' : removedState.objectId,
-                  'properties' : props
-                })
-
-              })
-
-
+                removedState.sensors.forEach(function (e, i, a) {
+                    var props = {};
+                    props[e] = removedState.properties[e];
+                    Apio.Serial.send({
+                        'objectId': removedState.objectId,
+                        'properties': props
+                    });
+                });
             }
-
-            res.send({error : false});
+            res.send({error: false});
         }
-        else
-            res.send({error : 'DATABASE_ERROR'});
-    })
-})
+        else{
+            res.send({error: 'DATABASE_ERROR'});
+        }
+    });
+});
 
 
 app.put("/apio/state/:name",function(req,res){
@@ -1014,11 +1027,11 @@ app.get("/app",
 /*
 *   Lancia l'evento
 */
-app.get("/apio/event/launch",routes.events.launch)
+app.get("/apio/event/launch",routes.events.launch);
 /*
 *   restituisce la lista degli eventi
 */
-app.get("/apio/event",routes.events.list)
+app.get("/apio/event",routes.events.list);
 
 /// error handlers
 
@@ -1127,6 +1140,7 @@ app.get('/apio/database/getObject/:id',routes.objects.getById);
 
 app.patch('/apio/object/:id',routes.objects.update);
 app.put('/apio/object/:id',routes.objects.update);
+app.post("/apio/object/addNotification", routes.objects.addNotification);
 
 app.get("/apio/object/:obj", function(req, res){
         Apio.Database.db.collection('Objects').findOne({objectId : req.params.obj},function(err, data){
@@ -1358,9 +1372,74 @@ Apio.io.on("connection", function(socket){
         })
 
         socket.on("apio_client_update", function(data){
+            var x = data;
+            try{
+                data = eval('('+data+')');
+                var check = function(d){
+                    for(var i in d){
+                        if(d[i] == 'true'){
+                            d[i] = true;
+                        } else if(d[i] == 'false'){
+                            d[i] = false;
+                        } else if(typeof d[i] === "number"){
+                            d[i] = d[i].toString();
+                        } else if(d[i] instanceof Object){
+                            check(d[i]);
+                        }
+                    }
+                };
+                check(data);
+            }
+            catch(e){
+                data = x;
+            }
+            
             Apio.Object.update(data,function(){
                 Apio.Remote.socket.emit('apio.server.object.update',data)
             })
+        });
+        
+        socket.on("apio_logic", function(data){
+            data = typeof data === "string" ? JSON.parse(data) : data;
+            var updt = {};
+            var objectComposition = function(d, o, s){
+                for(var i in d){
+                    if(typeof d[i] === "object"){
+                        objectComposition(d[i], o, s+"."+i);
+                    } else {
+                        o[s+"."+i] = d[i];
+                    }
+                }
+
+                for(var i in o){
+                    if(typeof o[i] === "object"){
+                        delete o[i];
+                    }
+                }
+
+                return o;
+            };
+
+            updt = objectComposition(data.change, updt, "properties");
+
+            Apio.Database.db.collection("Objects").update({ objectId : data.objectId }, { $set : updt }, function(e, r){
+                if(e){
+                    console.log("Unable to update object with objectId "+data.objectId);
+                } else if(r){
+                    socket.broadcast.emit("apio_logic", data);
+                }
+            });
+        });
+
+        socket.on("apio_object_online", function(data){
+            data = typeof data === "string" ? JSON.parse(data) : data;
+            Apio.Database.db.collection("Objects").update({ objectId : data.objectId }, { $set : { status : data.status } }, function(e, r){
+                if(e){
+                    console.log("Unable to update object with objectId "+data.objectId);
+                } else if(r){
+                    socket.broadcast.emit("apio_object_online", data);
+                }
+            });
         });
 
 });
